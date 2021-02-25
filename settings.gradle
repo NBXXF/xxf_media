@@ -1,1 +1,2 @@
-include ':sample', ':album'
+include ':preview', ':preview_demo'
+include ':album_demo', ':album'

@@ -4,7 +4,7 @@ ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/Android
 INJECTED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:17:1-29:12
 INJECTED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:17:1-29:12
 	package
-		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:19:5-32
+		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:19:5-34
 		INJECTED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml
 		INJECTED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml
 	xmlns:android
@@ -19,18 +19,18 @@ ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/Android
 		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:22:22-77
 application
 ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:24:5-28:19
-activity#com.zhihu.matisse.ui.AlbumActivity
-ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:25:9-70
+activity#com.xxf.media.album.ui.AlbumActivity
+ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:25:9-72
 	android:name
-		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:25:19-68
-activity#com.zhihu.matisse.internal.ui.AlbumPreviewActivity
-ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:26:9-86
+		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:25:19-70
+activity#com.xxf.media.album.internal.ui.AlbumPreviewActivity
+ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:26:9-88
 	android:name
-		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:26:19-84
-activity#com.zhihu.matisse.internal.ui.SelectedPreviewActivity
-ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:27:9-89
+		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:26:19-86
+activity#com.xxf.media.album.internal.ui.SelectedPreviewActivity
+ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:27:9-91
 	android:name
-		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:27:19-87
+		ADDED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml:27:19-89
 uses-sdk
 INJECTED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/mac/Documents/work_space/Matisse-master/album/src/main/AndroidManifest.xml

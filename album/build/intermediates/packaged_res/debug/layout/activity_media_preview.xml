@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.zhihu.matisse.internal.ui.widget.PreviewViewPager
+    <com.xxf.media.album.internal.ui.widget.PreviewViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,7 +65,7 @@
                 tools:showIn="@layout/activity_matisse">
 
 
-                <com.zhihu.matisse.internal.ui.widget.CheckRadioView
+                <com.xxf.media.album.internal.ui.widget.CheckRadioView
                     android:id="@+id/original"
                     android:src="@drawable/ic_preview_radio_off"
                     android:layout_gravity="center_vertical"
@@ -120,7 +120,7 @@
         android:layout_margin="8dp"
         android:fitsSystemWindows="true">
 
-        <com.zhihu.matisse.internal.ui.widget.CheckView
+        <com.xxf.media.album.internal.ui.widget.CheckView
             android:id="@+id/check_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
