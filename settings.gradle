@@ -1,2 +1,3 @@
+include ':camera_wechat', 'camera_wechat_demo'
 include ':preview', ':preview_demo'
-include ':album_demo', ':album'
+include  ':album',':album_demo'
