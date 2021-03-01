@@ -28,7 +28,7 @@ import androidx.databinding.ObservableField
 import com.daasuu.mp4compose.Rotation
 import com.daasuu.mp4compose.composer.Mp4Composer
 import com.xxf.camera.wechat.config.CameraConfig
-import com.xxf.camera.wechat.databinding.ActivityCameraBinding
+import com.xxf.camera.wechat.databinding.XxfActivityCameraWechatBinding
 import com.xxf.camera.wechat.provider.CameraProvider
 import com.xxf.camera.wechat.util.CameraUtil
 import com.xxf.camera.wechat.util.ClickUtil
@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit
 
 
 class CameraActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCameraBinding
+    private lateinit var binding: XxfActivityCameraWechatBinding
 
     /**
      * 预览组件监听
@@ -169,7 +169,7 @@ class CameraActivity : AppCompatActivity() {
                 window.attributes = lp
             }
         }
-        binding = DataBindingUtil.setContentView<ActivityCameraBinding>(this, R.layout.activity_camera)
+        binding = DataBindingUtil.setContentView<XxfActivityCameraWechatBinding>(this, R.layout.xxf_activity_camera_wechat)
         binding.mBtnRecord.processSec = CameraConfig.MAX_RECORD_TIME
         binding.activity = this
         init()
@@ -721,7 +721,7 @@ class CameraActivity : AppCompatActivity() {
             }
         }
     }
-    
+
     private fun stopRecord() {
         sessionOpenCloseLock.acquire()
         if (state.get() == STATE_RECORDING) {
