@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <com.chenxf.audiorecord.ui.view.RecordAudioView
+        <com.xxf.media.audio.uicomponent.RecordAudioView
             android:id="@+id/iv_recording"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <com.chenxf.audiorecord.ui.view.LineWaveVoiceView
+        <com.xxf.media.audio.uicomponent.LineWaveVoiceView
             android:id="@+id/horvoiceview"
             android:layout_width="match_parent"
             android:layout_height="60dp"

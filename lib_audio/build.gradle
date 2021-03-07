@@ -42,4 +42,5 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly "androidx.annotation:annotation:1.1.0"
     compileOnly "io.reactivex.rxjava3:rxjava:3.0.8"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 }

@@ -16,8 +16,6 @@ import com.chenxf.audiorecord.CommonApp;
 import com.chenxf.audiorecord.entity.EnterRecordAudioEntity;
 import com.chenxf.audiorecord.eventbus.EventBusConfig;
 import com.chenxf.audiorecord.eventbus.MainThreadEvent;
-import com.chenxf.audiorecord.ui.view.LineWaveVoiceView;
-import com.chenxf.audiorecord.ui.view.RecordAudioView;
 import com.chenxf.audiorecord.util.Cons;
 import com.chenxf.audiorecord.util.PaoPaoTips;
 import com.chenxf.audiorecord.util.PermissionUtil;
@@ -30,6 +28,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 import com.chenxf.audiorecord.R;
+import com.xxf.media.audio.uicomponent.LineWaveVoiceView;
+import com.xxf.media.audio.uicomponent.RecordAudioView;
 
 /**
  * 录制语音feed页面
