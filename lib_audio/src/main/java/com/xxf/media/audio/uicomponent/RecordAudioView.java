@@ -126,7 +126,7 @@ public class RecordAudioView extends androidx.appcompat.widget.AppCompatButton {
         if (isRecording) {
             try {
                 isRecording = false;
-                AudioRecorder.getInstance().startRecord();
+                AudioRecorder.getInstance().stopRecord();
                 this.recordAudioListener.onRecordStop();
             } catch (Exception e) {
                 this.recordAudioListener.onRecordCancel();
