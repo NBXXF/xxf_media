@@ -1,0 +1,4 @@
+#Sun Mar 07 15:23:50 CST 2021
+base.0=/Users/mac/Documents/work_space/xxf_media/lib_album_demo/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
