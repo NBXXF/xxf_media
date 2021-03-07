@@ -7,11 +7,11 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        externalNativeBuild {
-            cmake {
-                arguments '-DANDROID_TOOLCHAIN=clang'
-            }
-        }
+        /*    externalNativeBuild {
+                cmake {
+                    arguments '-DANDROID_TOOLCHAIN=clang'
+                }
+            }*/
     }
 
     buildTypes {
@@ -25,14 +25,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    externalNativeBuild {
-        cmake {
-            path 'src/main/cpp/CMakeLists.txt'
+//    externalNativeBuild {
+//        cmake {
+//            path 'src/main/cpp/CMakeLists.txt'
+//        }
+//    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs += ['libs']
         }
     }
 }
 
 dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly "androidx.annotation:annotation:1.1.0"
     compileOnly "io.reactivex.rxjava3:rxjava:3.0.8"
 }
