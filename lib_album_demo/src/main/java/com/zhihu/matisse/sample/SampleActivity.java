@@ -24,9 +24,13 @@ import com.xxf.media.album.MimeType;
 import com.xxf.media.album.engine.impl.GlideEngine;
 import com.xxf.media.album.engine.impl.PicassoEngine;
 import com.xxf.media.album.filter.Filter;
+import com.xxf.media.album.internal.entity.Album;
 import com.xxf.media.album.internal.entity.CaptureStrategy;
+import com.xxf.media.album.repo.AlbumService;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.functions.Consumer;
 
 public class SampleActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -180,4 +184,23 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AlbumService.INSTANCE.getImages(this)
+                .subscribe(new Consumer<List<String>>() {
+                    @Override
+                    public void accept(List<String> strings) throws Throwable {
+                        System.out.println("=========>imgs:" + strings);
+                    }
+                });
+
+        AlbumService.INSTANCE.getVideos(this)
+                .subscribe(new Consumer<List<String>>() {
+                    @Override
+                    public void accept(List<String> strings) throws Throwable {
+                        System.out.println("=========>videos:" + strings);
+                    }
+                });
+    }
 }
