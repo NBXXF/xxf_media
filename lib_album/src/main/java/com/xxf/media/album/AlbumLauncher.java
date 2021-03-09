@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.xxf.media.album.ui.AlbumActivity;
 
@@ -18,10 +19,10 @@ import java.util.Set;
  */
 public final class AlbumLauncher {
 
-    private final WeakReference<Activity> mContext;
+    private final WeakReference<FragmentActivity> mContext;
     private final WeakReference<Fragment> mFragment;
 
-    private AlbumLauncher(Activity activity) {
+    private AlbumLauncher(FragmentActivity activity) {
         this(activity, null);
     }
 
@@ -29,7 +30,7 @@ public final class AlbumLauncher {
         this(fragment.getActivity(), fragment);
     }
 
-    private AlbumLauncher(Activity activity, Fragment fragment) {
+    private AlbumLauncher(FragmentActivity activity, Fragment fragment) {
         mContext = new WeakReference<>(activity);
         mFragment = new WeakReference<>(fragment);
     }
@@ -43,7 +44,7 @@ public final class AlbumLauncher {
      * @param activity Activity instance.
      * @return Matisse instance.
      */
-    public static AlbumLauncher from(Activity activity) {
+    public static AlbumLauncher from(FragmentActivity activity) {
         return new AlbumLauncher(activity);
     }
 
@@ -125,7 +126,7 @@ public final class AlbumLauncher {
     }
 
     @Nullable
-    Activity getActivity() {
+    FragmentActivity getActivity() {
         return mContext.get();
     }
 

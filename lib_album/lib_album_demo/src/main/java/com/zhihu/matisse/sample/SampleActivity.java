@@ -12,19 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xxf.media.album.AlbumLauncher;
+import com.xxf.media.album.AlbumResult;
 import com.xxf.media.album.MimeType;
 import com.xxf.media.album.engine.impl.GlideEngine;
 import com.xxf.media.album.engine.impl.PicassoEngine;
 import com.xxf.media.album.filter.Filter;
-import com.xxf.media.album.internal.entity.Album;
 import com.xxf.media.album.internal.entity.CaptureStrategy;
 import com.xxf.media.album.repo.AlbumService;
 
@@ -55,16 +53,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     @SuppressLint("CheckResult")
     @Override
     public void onClick(final View v) {
-        RxPermissions rxPermissions = new RxPermissions(this);
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        startAction(v);
-                    } else {
-                        Toast.makeText(SampleActivity.this, R.string.permission_request_denied, Toast.LENGTH_LONG)
-                                .show();
-                    }
-                }, Throwable::printStackTrace);
+        startAction(v);
     }
     // </editor-fold>
 
@@ -94,7 +83,13 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                         .setOnCheckedListener(isChecked -> {
                             Log.e("isChecked", "onCheck: isChecked=" + isChecked);
                         })
-                        .forResult(REQUEST_CODE_CHOOSE);
+                        .forResult(REQUEST_CODE_CHOOSE)
+                        .subscribe(new Consumer<AlbumResult>() {
+                            @Override
+                            public void accept(AlbumResult albumResult) throws Throwable {
+                                mAdapter.setData(albumResult.getUris(), albumResult.getPaths());
+                            }
+                        });
                 break;
             case R.id.dracula:
                 AlbumLauncher.from(SampleActivity.this)
@@ -106,7 +101,13 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                         .originalEnable(true)
                         .maxOriginalSize(10)
                         .imageEngine(new PicassoEngine())
-                        .forResult(REQUEST_CODE_CHOOSE);
+                        .forResult(REQUEST_CODE_CHOOSE)
+                        .subscribe(new Consumer<AlbumResult>() {
+                            @Override
+                            public void accept(AlbumResult albumResult) throws Throwable {
+                                mAdapter.setData(albumResult.getUris(), albumResult.getPaths());
+                            }
+                        });
                 break;
             case R.id.only_gif:
                 AlbumLauncher.from(SampleActivity.this)
@@ -123,7 +124,13 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                         .originalEnable(true)
                         .maxOriginalSize(10)
                         .autoHideToolbarOnSingleTap(true)
-                        .forResult(REQUEST_CODE_CHOOSE);
+                        .forResult(REQUEST_CODE_CHOOSE)
+                        .subscribe(new Consumer<AlbumResult>() {
+                            @Override
+                            public void accept(AlbumResult albumResult) throws Throwable {
+                                mAdapter.setData(albumResult.getUris(), albumResult.getPaths());
+                            }
+                        });
                 break;
             default:
                 break;
@@ -131,14 +138,6 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         mAdapter.setData(null, null);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            mAdapter.setData(AlbumLauncher.obtainResult(data), AlbumLauncher.obtainPathResult(data));
-            Log.e("OnActivityResult ", String.valueOf(AlbumLauncher.obtainOriginalState(data)));
-        }
-    }
 
     private static class UriAdapter extends RecyclerView.Adapter<UriAdapter.UriViewHolder> {
 

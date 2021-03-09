@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId 'com.zhihu.matisse.sample'
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -28,12 +28,13 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.recyclerview:recyclerview:1.0.0"
-    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation project(path: ':lib_preview')
 
     implementation "io.reactivex.rxjava3:rxjava:3.0.8"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'com.github.NBXXF.xxf_android:lib_permission:3.3.4.9'
+    implementation 'com.github.NBXXF.xxf_android:lib_activityresult:3.3.4.9'
 }

@@ -16,16 +16,22 @@
  */
 package com.xxf.media.album;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StyleRes;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import com.xxf.activityresult.ActivityResult;
+import com.xxf.activityresult.RxActivityResultCompact;
 import com.xxf.media.album.engine.ImageEngine;
 import com.xxf.media.album.filter.Filter;
 import com.xxf.media.album.internal.entity.CaptureStrategy;
@@ -33,11 +39,20 @@ import com.xxf.media.album.internal.entity.SelectionSpec;
 import com.xxf.media.album.listener.OnCheckedListener;
 import com.xxf.media.album.listener.OnSelectedListener;
 import com.xxf.media.album.ui.AlbumActivity;
+import com.xxf.permission.RxPermissions;
+import com.xxf.permission.transformer.RxPermissionTransformer;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.functions.Supplier;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_BEHIND;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR;
@@ -163,7 +178,7 @@ public final class SelectionCreator {
      *
      * @param maxImageSelectable Maximum selectable count for image.
      * @param maxVideoSelectable Maximum selectable count for video.
-     * @return  {@link SelectionCreator} for fluent API.
+     * @return {@link SelectionCreator} for fluent API.
      */
     public SelectionCreator maxSelectablePerMediaType(int maxImageSelectable, int maxVideoSelectable) {
         if (maxImageSelectable < 1 || maxVideoSelectable < 1)
@@ -216,6 +231,7 @@ public final class SelectionCreator {
 
     /**
      * Determines Whether to hide top and bottom toolbar in PreView mode ,when user tap the picture
+     *
      * @param enable
      * @return {@link SelectionCreator} for fluent API.
      */
@@ -347,21 +363,66 @@ public final class SelectionCreator {
      * Start to select media and wait for result.
      *
      * @param requestCode Identity of the request Activity or Fragment.
+     * @return
      */
-    public void forResult(int requestCode) {
-        Activity activity = mMatisse.getActivity();
+    public Observable<AlbumResult> forResult(int requestCode) {
+        FragmentActivity activity = mMatisse.getActivity();
         if (activity == null) {
-            return;
+            return null;
         }
 
         Intent intent = new Intent(activity, AlbumActivity.class);
 
         Fragment fragment = mMatisse.getFragment();
+        Observable<ActivityResult> activityResultObservable;
         if (fragment != null) {
-            fragment.startActivityForResult(intent, requestCode);
+            activityResultObservable = Observable
+                    .defer(new Supplier<ObservableSource<? extends ActivityResult>>() {
+                        @Override
+                        public ObservableSource<? extends ActivityResult> get() throws Throwable {
+                            return new RxPermissions(fragment)
+                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    .compose(new RxPermissionTransformer(fragment.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                                    .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
+                                        @Override
+                                        public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
+                                            return RxActivityResultCompact
+                                                    .startActivityForResult(fragment, intent, requestCode);
+                                        }
+                                    });
+                        }
+                    }).subscribeOn(AndroidSchedulers.mainThread());
         } else {
-            activity.startActivityForResult(intent, requestCode);
+            activityResultObservable = Observable
+                    .defer(new Supplier<ObservableSource<? extends ActivityResult>>() {
+                        @Override
+                        public ObservableSource<? extends ActivityResult> get() throws Throwable {
+                            return new RxPermissions(activity)
+                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    .compose(new RxPermissionTransformer(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                                    .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
+                                        @Override
+                                        public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
+                                            return RxActivityResultCompact
+                                                    .startActivityForResult(activity, intent, requestCode);
+                                        }
+                                    });
+                        }
+                    }).subscribeOn(AndroidSchedulers.mainThread());
         }
+        return activityResultObservable.flatMap(new Function<ActivityResult, ObservableSource<AlbumResult>>() {
+
+            @Override
+            public ObservableSource<AlbumResult> apply(ActivityResult activityResult) throws Throwable {
+                if (activityResult.isOk()) {
+                    List<String> paths = AlbumLauncher.obtainPathResult(activity.getIntent());
+                    List<Uri> uris = AlbumLauncher.obtainResult(activity.getIntent());
+                    boolean isOriginalState = AlbumLauncher.obtainOriginalState(activity.getIntent());
+                    return Observable.just(new AlbumResult(isOriginalState, uris, paths));
+                }
+                return Observable.empty();
+            }
+        });
     }
 
     public SelectionCreator showPreview(boolean showPreview) {

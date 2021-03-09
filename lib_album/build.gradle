@@ -32,5 +32,8 @@ dependencies {
     compileOnly 'com.squareup.picasso:picasso:2.5.2'
 
     compileOnly "io.reactivex.rxjava3:rxjava:3.0.8"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compileOnly 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.3.4.9'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.3.4.9'
 }
