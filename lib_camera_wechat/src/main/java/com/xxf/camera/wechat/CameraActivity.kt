@@ -564,8 +564,8 @@ class CameraActivity : AppCompatActivity() {
                             matBitmap.compress(Bitmap.CompressFormat.JPEG, 80, fos)
                         }
                         val intent = Intent()
-                        intent.putExtra(JCamera.CAPTURE_RESULT_IS_IMG, true)
-                        intent.putExtra(JCamera.CAPTURE_RESULT, filePath)
+                        intent.putExtra(CameraLauncher.CAPTURE_RESULT_IS_IMG, true)
+                        intent.putExtra(CameraLauncher.CAPTURE_RESULT, filePath)
                         setResult(Activity.RESULT_OK, intent)
                         finish()
                     } catch (e: IOException) {
@@ -585,8 +585,8 @@ class CameraActivity : AppCompatActivity() {
             STATE_RECORD_TAKEN -> {
                 //捕获视频
                 val intent = Intent()
-                intent.putExtra(JCamera.CAPTURE_RESULT_IS_IMG, false)
-                intent.putExtra(JCamera.CAPTURE_RESULT, if (!comRecordPath.isNullOrBlank())comRecordPath else recordPath)
+                intent.putExtra(CameraLauncher.CAPTURE_RESULT_IS_IMG, false)
+                intent.putExtra(CameraLauncher.CAPTURE_RESULT, if (!comRecordPath.isNullOrBlank())comRecordPath else recordPath)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             }

@@ -14,9 +14,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Entry for Matisse's media selection.
- */
 public final class AlbumLauncher {
 
     private final WeakReference<FragmentActivity> mContext;

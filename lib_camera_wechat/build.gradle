@@ -25,10 +25,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api "androidx.core:core-ktx:1.1.0"
-    api 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     api 'com.github.MasayukiSuda:Mp4Composer-android:v0.3.4'
+
+    compileOnly "io.reactivex.rxjava3:rxjava:3.0.8"
+    compileOnly 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.3.4.9'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.3.4.9'
 }
 repositories {
     maven { url 'https://jitpack.io' }
