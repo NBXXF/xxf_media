@@ -415,9 +415,9 @@ public final class SelectionCreator {
             @Override
             public ObservableSource<AlbumResult> apply(ActivityResult activityResult) throws Throwable {
                 if (activityResult.isOk()) {
-                    List<String> paths = AlbumLauncher.obtainPathResult(activity.getIntent());
-                    List<Uri> uris = AlbumLauncher.obtainResult(activity.getIntent());
-                    boolean isOriginalState = AlbumLauncher.obtainOriginalState(activity.getIntent());
+                    List<String> paths = AlbumLauncher.obtainPathResult(activityResult.getData());
+                    List<Uri> uris = AlbumLauncher.obtainResult(activityResult.getData());
+                    boolean isOriginalState = AlbumLauncher.obtainOriginalState(activityResult.getData());
                     return Observable.just(new AlbumResult(isOriginalState, uris, paths));
                 }
                 return Observable.empty();
