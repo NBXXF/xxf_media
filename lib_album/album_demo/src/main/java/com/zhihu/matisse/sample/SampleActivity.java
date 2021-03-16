@@ -24,6 +24,7 @@ import com.xxf.media.album.engine.impl.GlideEngine;
 import com.xxf.media.album.engine.impl.PicassoEngine;
 import com.xxf.media.album.filter.Filter;
 import com.xxf.media.album.internal.entity.CaptureStrategy;
+import com.xxf.media.album.internal.entity.Item;
 import com.xxf.media.album.repo.AlbumService;
 
 import java.util.List;
@@ -187,17 +188,17 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     protected void onResume() {
         super.onResume();
         AlbumService.INSTANCE.getImages(this)
-                .subscribe(new Consumer<List<String>>() {
+                .subscribe(new Consumer<List<Item>>() {
                     @Override
-                    public void accept(List<String> strings) throws Throwable {
-                        System.out.println("=========>imgs:" + strings);
+                    public void accept(List<Item> items) throws Throwable {
+                        System.out.println("=========>imgs:" + items);
                     }
                 });
 
         AlbumService.INSTANCE.getVideos(this)
-                .subscribe(new Consumer<List<String>>() {
+                .subscribe(new Consumer<List<Item>>() {
                     @Override
-                    public void accept(List<String> strings) throws Throwable {
+                    public void accept(List<Item> strings) throws Throwable {
                         System.out.println("=========>videos:" + strings);
                     }
                 });

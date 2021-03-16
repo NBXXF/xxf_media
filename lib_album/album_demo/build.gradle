@@ -35,6 +35,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:3.0.8"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'com.github.NBXXF.xxf_android:lib_permission:3.3.4.9'
-    implementation 'com.github.NBXXF.xxf_android:lib_activityresult:3.3.4.9'
+    implementation 'com.github.NBXXF.xxf_android:lib_permission:3.3.5.1'
+    implementation 'com.github.NBXXF.xxf_android:lib_activityresult:3.3.5.1'
+    implementation 'com.github.NBXXF.xxf_android:lib_adapter:3.3.5.1'
 }

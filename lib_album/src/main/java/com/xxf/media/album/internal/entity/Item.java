@@ -17,16 +17,20 @@
 package com.xxf.media.album.internal.entity;
 
 import android.content.ContentUris;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+
 import androidx.annotation.Nullable;
 
 import com.xxf.media.album.MimeType;
+import com.xxf.media.album.internal.utils.PathUtils;
+import com.xxf.view.model.SelectableEntity;
 
-public class Item implements Parcelable {
+public class Item implements Parcelable, SelectableEntity {
     public static final Creator<Item> CREATOR = new Creator<Item>() {
         @Override
         @Nullable
@@ -46,6 +50,7 @@ public class Item implements Parcelable {
     public final Uri uri;
     public final long size;
     public final long duration; // only for video, in ms
+    public boolean itemSelected = false;
 
     private Item(long id, String mimeType, long size, long duration) {
         this.id = id;
@@ -122,9 +127,9 @@ public class Item implements Parcelable {
         Item other = (Item) obj;
         return id == other.id
                 && (mimeType != null && mimeType.equals(other.mimeType)
-                    || (mimeType == null && other.mimeType == null))
+                || (mimeType == null && other.mimeType == null))
                 && (uri != null && uri.equals(other.uri)
-                    || (uri == null && other.uri == null))
+                || (uri == null && other.uri == null))
                 && size == other.size
                 && duration == other.duration;
     }
@@ -140,5 +145,36 @@ public class Item implements Parcelable {
         result = 31 * result + Long.valueOf(size).hashCode();
         result = 31 * result + Long.valueOf(duration).hashCode();
         return result;
+    }
+
+    @Override
+    public boolean isItemSelected() {
+        return itemSelected;
+    }
+
+    @Override
+    public void setItemSelect(boolean select) {
+        this.itemSelected = select;
+    }
+
+    @Override
+    public void toggleItemSelect() {
+        this.itemSelected = !this.itemSelected;
+    }
+
+    public String getPath(Context context) {
+        return PathUtils.getPath(context, this.uri);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", mimeType='" + mimeType + '\'' +
+                ", uri=" + uri +
+                ", size=" + size +
+                ", duration=" + duration +
+                ", itemSelected=" + itemSelected +
+                '}';
     }
 }
