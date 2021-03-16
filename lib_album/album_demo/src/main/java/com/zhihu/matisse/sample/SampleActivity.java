@@ -187,6 +187,13 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
+        AlbumService.INSTANCE.getAlbum(this)
+                .subscribe(new Consumer<List<Item>>() {
+                    @Override
+                    public void accept(List<Item> items) throws Throwable {
+                        System.out.println("=========>all:" + items);
+                    }
+                });
         AlbumService.INSTANCE.getImages(this)
                 .subscribe(new Consumer<List<Item>>() {
                     @Override

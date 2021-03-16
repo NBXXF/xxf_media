@@ -1,13 +1,10 @@
 package com.xxf.media.album.repo
 
 import android.Manifest
-import android.content.ContentUris
 import android.provider.MediaStore
-import android.text.TextUtils
 import androidx.core.content.ContentResolverCompat
 import androidx.fragment.app.FragmentActivity
 import com.xxf.media.album.internal.entity.Item
-import com.xxf.media.album.internal.utils.PathUtils
 import com.xxf.permission.RxPermissions
 import com.xxf.permission.transformer.RxPermissionTransformer
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -34,9 +31,56 @@ object AlbumService {
             MediaStore.MediaColumns.SIZE,
             "duration")
 
+    // === params for album ALL && showSingleMediaType: false ===
+    private const val SELECTION_ALL = ("(" + MediaStore.Files.FileColumns.MEDIA_TYPE + "=?"
+            + " OR "
+            + MediaStore.Files.FileColumns.MEDIA_TYPE + "=?)"
+            + " AND " + MediaStore.MediaColumns.SIZE + ">0")
+    private val SELECTION_ALL_ARGS = arrayOf(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString(), MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO.toString())
 
     // ===============================================================
     private const val ORDER_BY = MediaStore.Images.Media.DATE_TAKEN + " DESC"
+
+
+    /**
+     * 获取相册所有图片和视频
+     */
+    fun getAlbum(context: FragmentActivity): Observable<List<Item>> {
+        return Observable
+                .defer<Boolean> {
+                    RxPermissions(context).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            .compose(RxPermissionTransformer(context, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                }
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .flatMap {
+                    Observable
+                            .fromCallable<List<Item>>(object : Callable<List<Item>> {
+                                override fun call(): List<Item> {
+                                    val items: MutableList<Item> = ArrayList()
+                                    val selection = SELECTION_ALL
+                                    val selectionArgs = SELECTION_ALL_ARGS
+                                    val cursor = ContentResolverCompat.query(context.getContentResolver(),
+                                            QUERY_URI, PROJECTION, selection, selectionArgs, ORDER_BY, null);
+                                    try {
+                                        if (cursor != null) {
+                                            while (cursor.moveToNext()) {
+                                                items.add(Item.valueOf(cursor))
+                                            }
+                                        }
+                                    } finally {
+                                        try {
+                                            cursor.close();
+                                        } catch (e: Throwable) {
+                                            e.printStackTrace()
+                                        }
+                                    }
+                                    return items;
+                                }
+
+                            })
+                            .subscribeOn(Schedulers.io());
+                }
+    }
 
     /**
      * 获取所有图片
