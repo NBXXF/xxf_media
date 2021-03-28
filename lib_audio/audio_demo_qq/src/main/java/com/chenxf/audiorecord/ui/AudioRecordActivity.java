@@ -162,7 +162,7 @@ public class AudioRecordActivity extends FragmentActivity implements
      * 上划取消
      */
     @Override
-    public void onSlideTop() {
+    public void onSlideOutSide() {
         mHorVoiceView.setVisibility(View.INVISIBLE);
         tvRecordTips.setVisibility(View.INVISIBLE);
         layoutCancelView.setVisibility(View.VISIBLE);
