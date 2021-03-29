@@ -370,36 +370,15 @@ public final class SelectionCreator {
         if (activity == null) {
             return null;
         }
-
         Intent intent = new Intent(activity, AlbumActivity.class);
-
-        Fragment fragment = mMatisse.getFragment();
-        Observable<ActivityResult> activityResultObservable;
-        if (fragment != null) {
-            activityResultObservable = Observable
-                    .defer(new Supplier<ObservableSource<? extends ActivityResult>>() {
-                        @Override
-                        public ObservableSource<? extends ActivityResult> get() throws Throwable {
-                            return new RxPermissions(fragment)
-                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                    .compose(new RxPermissionTransformer(fragment.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                                    .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
-                                        @Override
-                                        public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
-                                            return RxActivityResultCompact
-                                                    .startActivityForResult(fragment, intent, requestCode);
-                                        }
-                                    });
-                        }
-                    }).subscribeOn(AndroidSchedulers.mainThread());
-        } else {
-            activityResultObservable = Observable
-                    .defer(new Supplier<ObservableSource<? extends ActivityResult>>() {
-                        @Override
-                        public ObservableSource<? extends ActivityResult> get() throws Throwable {
+        return Observable
+                .defer(new Supplier<ObservableSource<? extends ActivityResult>>() {
+                    @Override
+                    public ObservableSource<? extends ActivityResult> get() throws Throwable {
+                        if (mSelectionSpec.capture) {
                             return new RxPermissions(activity)
-                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                    .compose(new RxPermissionTransformer(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                                    .compose(new RxPermissionTransformer(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA))
                                     .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
                                         @Override
                                         public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
@@ -408,21 +387,30 @@ public final class SelectionCreator {
                                         }
                                     });
                         }
-                    }).subscribeOn(AndroidSchedulers.mainThread());
-        }
-        return activityResultObservable.flatMap(new Function<ActivityResult, ObservableSource<AlbumResult>>() {
+                        return new RxPermissions(activity)
+                                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                .compose(new RxPermissionTransformer(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                                .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
+                                    @Override
+                                    public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
+                                        return RxActivityResultCompact
+                                                .startActivityForResult(activity, intent, requestCode);
+                                    }
+                                });
+                    }
+                }).subscribeOn(AndroidSchedulers.mainThread()).flatMap(new Function<ActivityResult, ObservableSource<AlbumResult>>() {
 
-            @Override
-            public ObservableSource<AlbumResult> apply(ActivityResult activityResult) throws Throwable {
-                if (activityResult.isOk()) {
-                    List<String> paths = AlbumLauncher.obtainPathResult(activityResult.getData());
-                    List<Uri> uris = AlbumLauncher.obtainResult(activityResult.getData());
-                    boolean isOriginalState = AlbumLauncher.obtainOriginalState(activityResult.getData());
-                    return Observable.just(new AlbumResult(isOriginalState, uris, paths));
-                }
-                return Observable.empty();
-            }
-        });
+                    @Override
+                    public ObservableSource<AlbumResult> apply(ActivityResult activityResult) throws Throwable {
+                        if (activityResult.isOk()) {
+                            List<String> paths = AlbumLauncher.obtainPathResult(activityResult.getData());
+                            List<Uri> uris = AlbumLauncher.obtainResult(activityResult.getData());
+                            boolean isOriginalState = AlbumLauncher.obtainOriginalState(activityResult.getData());
+                            return Observable.just(new AlbumResult(isOriginalState, uris, paths));
+                        }
+                        return Observable.empty();
+                    }
+                });
     }
 
     public SelectionCreator showPreview(boolean showPreview) {

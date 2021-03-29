@@ -17,19 +17,14 @@ import java.util.Set;
 public final class AlbumLauncher {
 
     private final WeakReference<FragmentActivity> mContext;
-    private final WeakReference<Fragment> mFragment;
 
-    private AlbumLauncher(FragmentActivity activity) {
-        this(activity, null);
-    }
 
     private AlbumLauncher(Fragment fragment) {
-        this(fragment.getActivity(), fragment);
+        this(fragment.getActivity());
     }
 
-    private AlbumLauncher(FragmentActivity activity, Fragment fragment) {
+    private AlbumLauncher(FragmentActivity activity) {
         mContext = new WeakReference<>(activity);
-        mFragment = new WeakReference<>(fragment);
     }
 
     /**
@@ -125,11 +120,6 @@ public final class AlbumLauncher {
     @Nullable
     FragmentActivity getActivity() {
         return mContext.get();
-    }
-
-    @Nullable
-    Fragment getFragment() {
-        return mFragment != null ? mFragment.get() : null;
     }
 
 }

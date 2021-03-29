@@ -30,6 +30,7 @@ import com.xxf.media.album.repo.AlbumService;
 import java.util.List;
 
 import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 public class SampleActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,6 +41,12 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Throwable {
+                Log.d("=======>", "tag:" + throwable);
+            }
+        });
         setContentView(R.layout.activity_main);
         findViewById(R.id.zhihu).setOnClickListener(this);
         findViewById(R.id.dracula).setOnClickListener(this);
