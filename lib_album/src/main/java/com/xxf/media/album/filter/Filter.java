@@ -47,9 +47,9 @@ public abstract class Filter {
     protected boolean needFiltering(Context context, Item item) {
         for (MimeType type : constraintTypes()) {
             if (type.checkType(context.getContentResolver(), item.getContentUri())) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }
