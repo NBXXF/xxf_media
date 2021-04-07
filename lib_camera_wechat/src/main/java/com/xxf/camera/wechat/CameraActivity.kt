@@ -69,7 +69,7 @@ class CameraActivity : AppCompatActivity() {
     private val MIN_RECORD_HEIGHT = 1280
 
     private lateinit var cameraManager: CameraManager
-    private lateinit var previewSession: CameraCaptureSession
+    private var previewSession: CameraCaptureSession?=null
     private lateinit var previewRequest: CaptureRequest
     private lateinit var previewBuilder: CaptureRequest.Builder
 
@@ -374,9 +374,7 @@ class CameraActivity : AppCompatActivity() {
     private fun closeCamera() {
         try {
             cameraOpenCloseLock.acquire()
-            if (::previewSession.isInitialized) {
-                previewSession.close()
-            }
+            previewSession?.close()
             cameraDevice?.close()
             cameraDevice = null
             if (::previewImageReader.isInitialized) {
@@ -479,7 +477,7 @@ class CameraActivity : AppCompatActivity() {
                 }
                 previewRequest = previewBuilder.build()
                 previewSession = session
-                previewSession.setRepeatingRequest(previewRequest, null, backgroundHandler)
+                previewSession?.setRepeatingRequest(previewRequest, null, backgroundHandler)
             }
         }, backgroundHandler)
     }
@@ -669,7 +667,7 @@ class CameraActivity : AppCompatActivity() {
      * ***********************************************************take photo
      */
     private fun takePhoto() {
-        if (cameraDevice == null || !binding.mTextureView.isAvailable || previewSession == null) {
+        if (cameraDevice == null || !binding.mTextureView.isAvailable) {
             return
         }
         try {
@@ -697,7 +695,7 @@ class CameraActivity : AppCompatActivity() {
                     showBtnLayout()
                 }
             }
-            previewSession.apply {
+            previewSession?.apply {
                 stopRepeating()
                 //abortCaptures()
                 //拍照
