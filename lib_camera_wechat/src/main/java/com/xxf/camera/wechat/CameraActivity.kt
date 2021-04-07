@@ -102,21 +102,25 @@ class CameraActivity : AppCompatActivity() {
     private var backgroundThread: HandlerThread? = null
     private var backgroundHandler: Handler? = null
     private var cameraDevice: CameraDevice? = null
+
     /**
      * 传感器定位
      */
     private var sensorOrientation = 0
     private var recordOrientation = 0
     private lateinit var orientationEventListener: OrientationEventListener
+
     /**
      * 用户操作
      */
     private var isPressRecord = false
+
     //当前视图显示阶段
     var state: ObservableField<Int> = ObservableField(STATE_PREVIEW)
     var captureImage: Image? = null
     private lateinit var recordSize: Size
     private lateinit var previewSize: Size
+
     /**
      * Record
      */
@@ -125,10 +129,12 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var mediaRecorder: MediaRecorder
     private lateinit var mediaPlayer: MediaPlayer
     private var mp4Composer: Mp4Composer? = null
+
     /**
      * Preview
      */
     private lateinit var previewSurface: Surface
+
     /**
      * Photo
      */
@@ -176,16 +182,16 @@ class CameraActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        when (state.get()){
-            STATE_RECORDING ->{
+        when (state.get()) {
+            STATE_RECORDING -> {
                 //录像状态 禁止退出
             }
-            STATE_RECORD_TAKEN ->{
+            STATE_RECORD_TAKEN -> {
                 //播放状态 需要先删除文件后退出
                 File(comRecordPath).delete()
                 finish()
             }
-            else->{
+            else -> {
                 //其余状态 删除临时录像文件后退出
                 File(recordPath).delete()
                 finish()
@@ -289,7 +295,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        binding.mTvRecordTip.text = "${if (CameraConfig.IS_ALLOW_PHOTO)getString(R.string.photo_tip)else ""}${if (CameraConfig.IS_ALLOW_PHOTO && CameraConfig.IS_ALLOW_RECORD)"," else ""}${if (CameraConfig.IS_ALLOW_RECORD)getString(R.string.record_tip)else ""}"
+        binding.mTvRecordTip.text = "${if (CameraConfig.IS_ALLOW_PHOTO) getString(R.string.photo_tip) else ""}${if (CameraConfig.IS_ALLOW_PHOTO && CameraConfig.IS_ALLOW_RECORD) "," else ""}${if (CameraConfig.IS_ALLOW_RECORD) getString(R.string.record_tip) else ""}"
         initCamera()
         initTouchListener()
     }
@@ -317,7 +323,7 @@ class CameraActivity : AppCompatActivity() {
                             // Log.e("CameraUtil","aspectRatio $aspectRatio - width ${size.width.toFloat()} - height ${ size.height.toFloat()}")
                         }
                     }
-                    if (CameraConfig.BACK_CAMERA_ID.isBlank()){
+                    if (CameraConfig.BACK_CAMERA_ID.isBlank()) {
                         // 多后摄像头 取第一个
                         CameraConfig.BACK_CAMERA_ID = cId
                         CameraConfig.BACK_CAMERA_CHARACTERISTIC = cameraCharacteristics
@@ -376,7 +382,7 @@ class CameraActivity : AppCompatActivity() {
             if (::previewImageReader.isInitialized) {
                 previewImageReader.close()
             }
-        } catch (e: InterruptedException) {
+        } catch (e: Exception) {
             throw RuntimeException("Interrupted while trying to lock camera closing.", e)
         } finally {
             cameraOpenCloseLock.release()
@@ -385,7 +391,7 @@ class CameraActivity : AppCompatActivity() {
 
     private fun initPreview() {
         //设置预览尺寸
-        if (!::previewSize.isInitialized){
+        if (!::previewSize.isInitialized) {
             var size = CameraUtil.getMaxOptimalSize(CameraConfig.getCurrentCameraCameraCharacteristics(), SurfaceTexture::class.java,
                     binding.mTextureView.height, binding.mTextureView.width)
             if (size == null) {
@@ -394,7 +400,7 @@ class CameraActivity : AppCompatActivity() {
             previewSize = size
         }
         //设置录像尺寸
-        if (!::recordSize.isInitialized){
+        if (!::recordSize.isInitialized) {
             val mRecordSize = CameraUtil.getMinOptimalSize(CameraConfig.getCurrentCameraCameraCharacteristics(), SurfaceTexture::class.java,
                     binding.mTextureView.height, binding.mTextureView.width)
             if (mRecordSize == null) {
@@ -477,6 +483,7 @@ class CameraActivity : AppCompatActivity() {
             }
         }, backgroundHandler)
     }
+
     /**
      * 解除锁定
      */
@@ -493,11 +500,11 @@ class CameraActivity : AppCompatActivity() {
                 //预览视图恢复默认
                 val matrix = Matrix()
                 binding.mTextureView.getTransform(matrix)
-                matrix.setScale(1f,  1f)
+                matrix.setScale(1f, 1f)
                 matrix.postTranslate(0f, 0f)
                 binding.mTextureView.setTransform(matrix)
                 openCamera()
-            } else if (state.get() == STATE_RECORD_PROCESS){
+            } else if (state.get() == STATE_RECORD_PROCESS) {
                 //还在处理视频 还未开始播放
                 mp4Composer?.cancel()
 
@@ -505,15 +512,15 @@ class CameraActivity : AppCompatActivity() {
                 //预览视图恢复默认
                 val matrix = Matrix()
                 binding.mTextureView.getTransform(matrix)
-                matrix.setScale(1f,  1f)
+                matrix.setScale(1f, 1f)
                 matrix.postTranslate(0f, 0f)
                 binding.mTextureView.setTransform(matrix)
                 openCamera()
-            }else {
+            } else {
                 // Reset the auto-focus trigger
-                if(cameraDevice == null){
+                if (cameraDevice == null) {
                     openCamera()
-                }else {
+                } else {
                     previewBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
                             CameraMetadata.CONTROL_AF_TRIGGER_CANCEL)
                     state.set(STATE_PREVIEW)
@@ -522,7 +529,7 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
 
-        } catch (e: CameraAccessException) {
+        } catch (e: Exception) {
             Log.e(TAG, e.toString())
         }
 
@@ -556,7 +563,7 @@ class CameraActivity : AppCompatActivity() {
                             //前置摄像头 图片需要镜像
                             val matrix = Matrix()
                             matrix.setScale(-1f, 1f)
-                            matrix.postRotate((sensorOrientation.toFloat() + 90) % 360 )
+                            matrix.postRotate((sensorOrientation.toFloat() + 90) % 360)
                             fos.close()
                             bitmap = BitmapFactory.decodeFile(filePath)
                             matBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
@@ -586,7 +593,7 @@ class CameraActivity : AppCompatActivity() {
                 //捕获视频
                 val intent = Intent()
                 intent.putExtra(CameraLauncher.CAPTURE_RESULT_IS_IMG, false)
-                intent.putExtra(CameraLauncher.CAPTURE_RESULT, if (!comRecordPath.isNullOrBlank())comRecordPath else recordPath)
+                intent.putExtra(CameraLauncher.CAPTURE_RESULT, if (!comRecordPath.isNullOrBlank()) comRecordPath else recordPath)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             }
@@ -606,7 +613,7 @@ class CameraActivity : AppCompatActivity() {
         //初始化按钮录像完毕回调
         binding.mBtnRecord.setOnFinishCallBack(object : CircleProgressButton.OnFinishCallback {
             override fun progressStart() {
-                backgroundHandler?.postDelayed(startRecordRunnable,0L)
+                backgroundHandler?.postDelayed(startRecordRunnable, 0L)
             }
 
             override fun progressFinish() {
@@ -662,7 +669,7 @@ class CameraActivity : AppCompatActivity() {
      * ***********************************************************take photo
      */
     private fun takePhoto() {
-        if (cameraDevice == null || !binding.mTextureView.isAvailable) {
+        if (cameraDevice == null || !binding.mTextureView.isAvailable || previewSession == null) {
             return
         }
         try {
@@ -696,7 +703,7 @@ class CameraActivity : AppCompatActivity() {
                 //拍照
                 capture(captureBuilder?.build()!!, captureCallback, null)
             }
-        } catch (e: CameraAccessException) {
+        } catch (e: Exception) {
             Log.e(TAG, e.toString())
         }
     }
@@ -735,68 +742,73 @@ class CameraActivity : AppCompatActivity() {
                 mediaPlayer.reset()
                 var isBackCamera = CameraConfig.last_camera_id == CameraConfig.BACK_CAMERA_ID
                 //解决镜像问题
-                mp4Composer = Mp4Composer(recordPath,comRecordPath)
-                    .rotation(correctRecord()).flipHorizontal(!isBackCamera).listener(object : Mp4Composer.Listener{
-                    override fun onFailed(exception: Exception?) {
-                        exception?.printStackTrace()
-                    }
-                    override fun onProgress(progress: Double) {
-                    }
-                    override fun onCanceled() {
-                    }
-                    override fun onCompleted() {
-                        //任务被取消
-                        if (state.get() != STATE_RECORD_PROCESS){return}
-                        val uri: Uri
-                        if (Build.VERSION.SDK_INT >= 24) {
-                            uri = FileProvider.getUriForFile(this@CameraActivity, CameraProvider.getFileProviderName(this@CameraActivity), File(comRecordPath))
-                        } else {
-                            uri = Uri.fromFile(File(comRecordPath))
-                        }
-                        //还没开始预览便退出 mediaPlayer处于end状态则清除数据
-                        try {
-                            mediaPlayer.setDataSource(this@CameraActivity, uri)
-                            //AudioAttributes是一个封装音频各种属性的类
-                            val attrBuilder = AudioAttributes.Builder()
-                            //************************************* 横向拍摄需要修改preview显示方向
-                            if (recordOrientation == 90 || recordOrientation == 270){
-                                setHorizontalPreview()
+                mp4Composer = Mp4Composer(recordPath, comRecordPath)
+                        .rotation(correctRecord()).flipHorizontal(!isBackCamera).listener(object : Mp4Composer.Listener {
+                            override fun onFailed(exception: Exception?) {
+                                exception?.printStackTrace()
                             }
-                            //*************************************
-                            //设置音频流的合适属性
-                            attrBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC)
-                            mediaPlayer.setAudioAttributes(attrBuilder.build())
-                            mediaPlayer.setSurface(Surface(binding.mTextureView.surfaceTexture))
-                            mediaPlayer.setOnPreparedListener {
-                                mediaPlayer.isLooping = true
-                                mediaPlayer.start()
-                                //移除原视频
-                                File(recordPath).delete()
+
+                            override fun onProgress(progress: Double) {
                             }
-                            mediaPlayer.prepare()
 
-                            state.set(STATE_RECORD_TAKEN)
+                            override fun onCanceled() {
+                            }
 
-                        }catch (e: Exception){
-                            //移除临时文件
-                            File(comRecordPath).delete()
-                            File(recordPath).delete()
-                        }
-                    }
-                }).start()
-            }catch (e: Exception){
+                            override fun onCompleted() {
+                                //任务被取消
+                                if (state.get() != STATE_RECORD_PROCESS) {
+                                    return
+                                }
+                                val uri: Uri
+                                if (Build.VERSION.SDK_INT >= 24) {
+                                    uri = FileProvider.getUriForFile(this@CameraActivity, CameraProvider.getFileProviderName(this@CameraActivity), File(comRecordPath))
+                                } else {
+                                    uri = Uri.fromFile(File(comRecordPath))
+                                }
+                                //还没开始预览便退出 mediaPlayer处于end状态则清除数据
+                                try {
+                                    mediaPlayer.setDataSource(this@CameraActivity, uri)
+                                    //AudioAttributes是一个封装音频各种属性的类
+                                    val attrBuilder = AudioAttributes.Builder()
+                                    //************************************* 横向拍摄需要修改preview显示方向
+                                    if (recordOrientation == 90 || recordOrientation == 270) {
+                                        setHorizontalPreview()
+                                    }
+                                    //*************************************
+                                    //设置音频流的合适属性
+                                    attrBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC)
+                                    mediaPlayer.setAudioAttributes(attrBuilder.build())
+                                    mediaPlayer.setSurface(Surface(binding.mTextureView.surfaceTexture))
+                                    mediaPlayer.setOnPreparedListener {
+                                        mediaPlayer.isLooping = true
+                                        mediaPlayer.start()
+                                        //移除原视频
+                                        File(recordPath).delete()
+                                    }
+                                    mediaPlayer.prepare()
+
+                                    state.set(STATE_RECORD_TAKEN)
+
+                                } catch (e: Exception) {
+                                    //移除临时文件
+                                    File(comRecordPath).delete()
+                                    File(recordPath).delete()
+                                }
+                            }
+                        }).start()
+            } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(this@CameraActivity, getString(R.string.record_time_short), Toast.LENGTH_SHORT).show()
                 File(recordPath).delete()
-                previewSession.apply {
+                previewSession?.apply {
                     stopRepeating()
                     abortCaptures()
                 }
                 unlockFocus()
-            }finally {
+            } finally {
                 sessionOpenCloseLock.release()
             }
-        }else {
+        } else {
             //已经被操作了 直接释放信号
             sessionOpenCloseLock.release()
         }
@@ -810,7 +822,9 @@ class CameraActivity : AppCompatActivity() {
         mediaRecorder.reset()
         val timeStamp = getDate()
         //删除上一个临时视频
-        if (!recordPath.isNullOrBlank()){File(recordPath).delete()}
+        if (!recordPath.isNullOrBlank()) {
+            File(recordPath).delete()
+        }
         recordPath = "${CameraConfig.getSaveDir(this@CameraActivity)}/mov_$timeStamp.mp4"
         comRecordPath = "${CameraConfig.getSaveDir(this@CameraActivity)}/mov_${timeStamp}comp.mp4"
         mediaRecorder.apply {
@@ -828,7 +842,7 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    private fun setHorizontalPreview(){
+    private fun setHorizontalPreview() {
         var aspectRatio = previewSize.width.toFloat() / previewSize.height.toFloat()
         val newWidth: Int
         val newHeight: Int
@@ -845,18 +859,19 @@ class CameraActivity : AppCompatActivity() {
         val yoff = (previewSize.height - newHeight) / 2
         val matrix = Matrix()
         binding.mTextureView.getTransform(matrix)
-        matrix.setScale(1f,  newWidth.toFloat() / previewSize.width.toFloat())
+        matrix.setScale(1f, newWidth.toFloat() / previewSize.width.toFloat())
         matrix.postTranslate(0f, xoff.toFloat())
         binding.mTextureView.setTransform(matrix)
     }
+
     private fun correctRecord(): Rotation {
-        val rotation:Rotation
-        when (CameraUtil.getJpegOrientation(CameraConfig.getCurrentCameraCameraCharacteristics(), recordOrientation)){
-            0->rotation = Rotation.NORMAL
-            90->rotation = Rotation.ROTATION_90
-            180->rotation = Rotation.ROTATION_180
-            270->rotation = Rotation.ROTATION_270
-            else->rotation = Rotation.NORMAL
+        val rotation: Rotation
+        when (CameraUtil.getJpegOrientation(CameraConfig.getCurrentCameraCameraCharacteristics(), recordOrientation)) {
+            0 -> rotation = Rotation.NORMAL
+            90 -> rotation = Rotation.ROTATION_90
+            180 -> rotation = Rotation.ROTATION_180
+            270 -> rotation = Rotation.ROTATION_270
+            else -> rotation = Rotation.NORMAL
         }
         return rotation
     }
@@ -886,6 +901,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         private const val TAG = "CameraActivityTAG"
+
         /**
          * Camera state: 预览相机
          */
@@ -900,10 +916,12 @@ class CameraActivity : AppCompatActivity() {
          * Camera state: 正在录像
          */
         const val STATE_RECORDING = 0x00000002
+
         /**
          * Camera state: 处理录像
          */
         const val STATE_RECORD_PROCESS = 0x00000003
+
         /**
          * Camera state: 捕获录像
          */

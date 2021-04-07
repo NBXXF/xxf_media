@@ -1,14 +1,19 @@
 package com.xxf.camera.wechat.demo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.xxf.camera.wechat.CameraLauncher
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val PHOTO_OR_VIDEO_FOR_CAMERA = 0x3701
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        RxJavaPlugins.setErrorHandler {
+            Log.d("=======>error:", "" + it);
+        }
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         text.text = "请按下拍照按钮\nPlease pressed camera button"
