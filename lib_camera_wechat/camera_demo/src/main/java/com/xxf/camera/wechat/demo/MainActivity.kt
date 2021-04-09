@@ -1,5 +1,6 @@
 package com.xxf.camera.wechat.demo
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -21,9 +22,9 @@ class MainActivity : AppCompatActivity() {
             //如不设置 会默认打开上一次配置的结果
             CameraLauncher.instance
                     //.openPreCamera()// 是否打开为前置摄像头
-                    .allowPhoto(true)// 是否允许拍照 默认允许
-                    .allowRecord(true)// 是否允许录像 默认允许
-                    .setMaxRecordTime(3)//最长录像时间 秒
+                    //.allowPhoto(true)// 是否允许拍照 默认允许
+                    //.allowRecord(true)// 是否允许录像 默认允许
+                    //.setMaxRecordTime(3)//最长录像时间 秒
                     .forResult(this, PHOTO_OR_VIDEO_FOR_CAMERA)
                     .subscribe {
                         if (it.isImage) {
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }

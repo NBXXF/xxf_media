@@ -3,6 +3,7 @@ package com.xxf.camera.wechat.config
 import android.content.Context
 import android.hardware.camera2.CameraCharacteristics
 import android.os.Environment
+import android.util.Log
 import java.io.File
 
 
@@ -17,7 +18,7 @@ class CameraConfig {
         //最后一次打开的摄像头
         var last_camera_id = ""
             get() {
-                if (field.isNullOrBlank()) {
+                if (field.isEmpty()) {
                     field = BACK_CAMERA_ID
                 }
                 return field
@@ -48,13 +49,15 @@ class CameraConfig {
         /**
          * store
          */
-        fun getSaveDir(context :Context):String{
-            val dir = "${Environment.getExternalStorageDirectory().toString() + "/" + context.packageName}/JCamera"
-            var file = File(dir)
-            if (!file.exists()){
-                file.mkdirs()
+        fun getSaveDir(context: Context):String{
+            val dir = File("${context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)}")
+            if (!dir.exists()){
+                if (!dir.mkdirs()) {
+                    Log.d("getSaveDir", "Failed to create directory.")
+                    return ""
+                }
             }
-            return dir
+            return dir.absolutePath
         }
     }
 }
