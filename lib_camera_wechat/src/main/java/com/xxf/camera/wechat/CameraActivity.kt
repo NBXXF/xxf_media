@@ -41,6 +41,7 @@ import java.util.*
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
 import android.media.MediaRecorder
+import java.lang.IllegalStateException
 
 
 class CameraActivity : AppCompatActivity() {
@@ -74,6 +75,7 @@ class CameraActivity : AppCompatActivity() {
     private var previewSession: CameraCaptureSession? = null
     private lateinit var previewRequest: CaptureRequest
     private lateinit var previewBuilder: CaptureRequest.Builder
+    private var recordeStart:Boolean=false
 
     private val cameraStateCallback: CameraDevice.StateCallback = object : CameraDevice.StateCallback() {
         override fun onOpened(camera: CameraDevice) {
@@ -381,6 +383,9 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun initPreview() {
+        val display = windowManager.defaultDisplay
+        val point = Point()
+        display.getSize(point)
         //设置预览尺寸
         if (!::previewSize.isInitialized) {
             var size = CameraUtil.getMaxOptimalSize(CameraConfig.getCurrentCameraCameraCharacteristics(), SurfaceTexture::class.java,
@@ -394,7 +399,10 @@ class CameraActivity : AppCompatActivity() {
         //设置录像尺寸
         if (!::recordSize.isInitialized) {
             val mRecordSize = CameraUtil.getMinOptimalSize(CameraConfig.getCurrentCameraCameraCharacteristics(), SurfaceTexture::class.java,
-                    binding.mTextureView.height, binding.mTextureView.width)
+                    point.x, point.y)
+            /* val profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH)
+           Log.e(TAG, "initPreview: recordSize0 =${profile.videoFrameWidth}, ${profile.videoFrameHeight}")
+            Log.e(TAG, "initPreview: recordSize1 =${mRecordSize}：${point} ")*/
             if (mRecordSize == null) {
                 recordSize = Size(MIN_RECORD_WIDHT, MIN_RECORD_HEIGHT)
             } else {
@@ -487,52 +495,52 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun record() {
+        val surfaceTexture = binding.mTextureView.surfaceTexture
+        surfaceTexture.setDefaultBufferSize(recordSize.width, recordSize.height)
         closePreviewSession()
-
-        //initPreview()
         //重置录像
-       if(setUpMediaRecorder()) {
-           cameraDevice?.let {
-              val previewBuilder = it.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
+        if (setUpMediaRecorder()) {
+            cameraDevice?.let {
+                val previewBuilder = it.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
 
-               val outputList = mutableListOf<Surface>()
+                val outputList = mutableListOf<Surface>()
 
-               mediaRecorder?.surface?.let { surface ->
-                   Log.e(TAG, "record: add surface ${outputList.size}")
-                   outputList.add(surface)
-                   previewBuilder.addTarget(surface)
-               }
-               mWorkingSurface?.let { workingSurface ->
-                   Log.e(TAG, "record: add mWorkingSurface ${outputList.size}")
-                   outputList.add(workingSurface)
-                   previewBuilder.addTarget(workingSurface)
-               }
-               it.createCaptureSession(outputList, object : CameraCaptureSession.StateCallback() {
+                mediaRecorder?.surface?.let { surface ->
+                    outputList.add(surface)
+                    previewBuilder.addTarget(surface)
+                }
+                mWorkingSurface?.let { workingSurface ->
+                    outputList.add(workingSurface)
+                    previewBuilder.addTarget(workingSurface)
+                }
+                it.createCaptureSession(outputList, object : CameraCaptureSession.StateCallback() {
 
-                   override fun onConfigureFailed(session: CameraCaptureSession) {
-                       Log.e("onConfigureFailed", "onConfigureFailed: 相机打开失败${session}")
-                   }
+                    override fun onConfigureFailed(session: CameraCaptureSession) {
+                        Log.e("onConfigureFailed", "onConfigureFailed: 相机打开失败${session}")
+                    }
 
-                   override fun onConfigured(session: CameraCaptureSession) {
-                       //相机未打开
+                    override fun onConfigured(session: CameraCaptureSession) {
+                        //相机未打开
 
-                       previewSession = session
-                       previewBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
-                       try {
-                           session.setRepeatingRequest(previewBuilder.build(), null, backgroundHandler)
-                       } catch (e: java.lang.Exception) {
-                       }
-                       try {
-                           mediaRecorder?.start()
-                           Log.e(TAG, "onConfigured: 开始录像")
-                       } catch (ignore: java.lang.Exception) {
-                           Log.e(TAG, "mMediaRecorder.start(): ", ignore)
-                       }
+                        previewSession = session
+                        previewBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
+                        try {
+                            session.setRepeatingRequest(previewBuilder.build(), null, backgroundHandler)
+                        } catch (e: java.lang.Exception) {
+                        }
+                        try {
+                            mediaRecorder?.start()
+                            recordeStart=true
+                            startTime = System.currentTimeMillis()
+                            Log.e(TAG, "onConfigured: 开始录像")
+                        } catch (ignore: java.lang.Exception) {
+                            Log.e(TAG, "mMediaRecorder.start(): ", ignore)
+                        }
 
-                   }
-               }, backgroundHandler)
-           }
-       }
+                    }
+                }, backgroundHandler)
+            }
+        }
 
     }
 
@@ -666,8 +674,6 @@ class CameraActivity : AppCompatActivity() {
         binding.mBtnRecord.setOnFinishCallBack(object : CircleProgressButton.OnFinishCallback {
             override fun progressStart() {
                 Log.e(TAG, "progressStart: 按钮按下")
-                val surfaceTexture = binding.mTextureView.surfaceTexture
-                surfaceTexture.setDefaultBufferSize(previewSize.width, previewSize.height)
                 backgroundHandler?.post(startRecordRunnable)
             }
 
@@ -683,23 +689,18 @@ class CameraActivity : AppCompatActivity() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     isPressRecord = true
-                    //
-                    backgroundHandler?.postDelayed(launchRunnable, 500)
-                }
-                MotionEvent.ACTION_MOVE -> {
-//                    Log.e(TAG,"ACTION_MOVE Y: ${event.y}")
-//                    if (event.y < 0 && state.get() == STATE_RECORDING){
-//                        //录像中滑动变焦
-//                    }
+                    Log.e(TAG, "initTouchListener: start2")
+                    binding.mBtnRecord.postDelayed(launchRunnable, 500)
                 }
                 MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
                     //录像到最大时间而提前结束也会触发， 防止重复调用
-
                     if (isPressRecord) {
                         isPressRecord = false
                         Log.e(TAG, "initTouchListener: stop2")
                         unPressRecord()
                     }
+                }
+                else -> {
                 }
             }
             true
@@ -769,6 +770,7 @@ class CameraActivity : AppCompatActivity() {
     /**
      * ***********************************************************record
      */
+    var startTime: Long = 0
     private fun startRecord() {
         sessionOpenCloseLock.acquire()
         if (state.get() != STATE_RECORDING) {
@@ -777,7 +779,6 @@ class CameraActivity : AppCompatActivity() {
                 //记录拍摄时 手机方向
                 recordOrientation = sensorOrientation
                 record()
-
                 sessionOpenCloseLock.release()
                 Log.e(TAG, "startRecord:  mediaRecorder start")
             } catch (e: Exception) {
@@ -790,27 +791,37 @@ class CameraActivity : AppCompatActivity() {
 
     protected fun releaseVideoRecorder() {
         mediaRecorder?.let {
+            it.setOnErrorListener(null)
+            it.setOnInfoListener(null)
+            it.setPreviewDisplay(null)
             try {
-                it.setOnErrorListener(null)
-                it.setOnInfoListener(null)
-                it.setPreviewDisplay(null)
-                it.stop()
+                if(recordeStart) {
+                    val stopTime = System.currentTimeMillis() - startTime
+                    Log.e(TAG, "releaseVideoRecorder: 录制时长${stopTime}")
+                    if (stopTime < 1100) {
+                        Thread.sleep(1100 - stopTime)
+                    }
+                    it.stop()
+                }else {
+
+                }
+            } catch (ignore: IllegalStateException) {
+                //ignore.printStackTrace()
             } catch (ignore: RuntimeException) {
-                // TODO 如果当前java状态和jni里面的状态不一致，
-                ignore.printStackTrace()
                 val writer = StringWriter()
                 val printWriter = PrintWriter(writer)
                 ignore.printStackTrace(printWriter)
                 val stack_trace: String = writer.buffer.toString()
                 Log.e(TAG, "stopRecord: ${stack_trace}")
+            } catch (ignore: java.lang.Exception) {
+
+            } finally {
+                it.reset()
+                it.release()
+                recordeStart=false
+                backgroundHandler?.removeCallbacks(startRecordRunnable)
+                mediaRecorder = null
             }
-        }
-        try {
-            mediaRecorder?.reset()
-            mediaRecorder?.release()
-        } catch (ignore: java.lang.Exception) {
-        } finally {
-            mediaRecorder = null
         }
     }
 
@@ -907,7 +918,7 @@ class CameraActivity : AppCompatActivity() {
     /**
      * 配置MediaRecorder
      */
-    private fun setUpMediaRecorder() :Boolean{
+    private fun setUpMediaRecorder(): Boolean {
         //创建MediaRecorder用于录像
         //创建MediaPlayer用于播放
         if (!::mediaPlayer.isInitialized) {
@@ -944,7 +955,7 @@ class CameraActivity : AppCompatActivity() {
             }
             Log.e(TAG, "setUpMediaRecorder: 创建成功")
             return true
-        }catch (e: java.lang.Exception){
+        } catch (e: java.lang.Exception) {
 
         }
         return false

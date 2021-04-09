@@ -1,6 +1,7 @@
 package com.xxf.camera.wechat.util
 
 import android.hardware.camera2.CameraCharacteristics
+import android.media.CamcorderProfile
 import android.util.Log
 import android.util.Size
 import com.xxf.camera.wechat.CameraActivity
@@ -56,6 +57,7 @@ class CameraUtil {
                 if (offsets.isNotEmpty()) {
                     var minOffset = offsets.min()
                     for (size in supportedSizes) {
+                        //Log.e("getMinOptimalSize", "getMinOptimalSize: ${size}")
                         val offset = (size.width.toFloat() / size.height - aspectRatio)
                         if (Math.abs(offset) == offset && (size.height <= maxHeight || size.width <= maxWidth) && (size.height >= 1280 || size.width >= 960)) {
                             sizeList.add(size)
