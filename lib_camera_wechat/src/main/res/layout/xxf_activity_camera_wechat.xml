@@ -87,11 +87,5 @@
                 android:layout_marginLeft="80dp"
                 android:src="@mipmap/ic_ok" />
         </LinearLayout>
-
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
