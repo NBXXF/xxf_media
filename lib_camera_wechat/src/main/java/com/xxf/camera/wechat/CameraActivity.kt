@@ -598,7 +598,7 @@ class CameraActivity : AppCompatActivity() {
      */
     fun captureResult() {
         //防抖
-        if (ClickUtil.isFastClick()) return
+        if (!ClickUtil.isFastClick()) return
         when (state.get()) {
             STATE_PICTURE_TAKEN -> {
                 //捕获图片 先删除录像临时文件
