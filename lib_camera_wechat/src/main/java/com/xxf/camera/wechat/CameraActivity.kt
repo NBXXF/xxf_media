@@ -423,7 +423,7 @@ class CameraActivity : AppCompatActivity() {
 
 
     fun changeCamera() {
-        if (ClickUtil.isFastClick()) return
+        if (!ClickUtil.isFastClick()) return
         closeCamera()
         when (CameraConfig.last_camera_id) {
             CameraConfig.FRONT_CAMERA_ID -> {
@@ -547,7 +547,7 @@ class CameraActivity : AppCompatActivity() {
      */
     fun unlockFocus() {
         //防抖
-        if (ClickUtil.isFastClick()) return
+        if (!ClickUtil.isFastClick()) return
         try {
             // 视频需要删除暂存文件
             if (state.get() == STATE_RECORD_TAKEN) {
