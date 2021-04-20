@@ -56,7 +56,7 @@ public class RecordAudioView extends androidx.appcompat.widget.AppCompatButton {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
-        if (recordAudioListener != null) {
+        if (isEnabled()&&recordAudioListener != null) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     setSelected(true);
