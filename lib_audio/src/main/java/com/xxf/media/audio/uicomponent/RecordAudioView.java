@@ -87,7 +87,7 @@ public class RecordAudioView extends androidx.appcompat.widget.AppCompatButton {
     /**
      * 手指抬起,可能是取消录制也有可能是录制成功
      */
-    private void onFingerUp() {
+    public void onFingerUp() {
         if (isRecording) {
             if (isCanceled) {
                 isRecording = false;
@@ -155,7 +155,7 @@ public class RecordAudioView extends androidx.appcompat.widget.AppCompatButton {
     /**
      * 停止录音
      */
-    private void stopRecordAudio() throws RuntimeException {
+    public void stopRecordAudio() throws RuntimeException {
         if (isRecording) {
             try {
                 isRecording = false;
