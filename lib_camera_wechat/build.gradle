@@ -28,7 +28,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    api 'com.github.MasayukiSuda:Mp4Composer-android:v0.3.4'
+    api 'com.github.MasayukiSuda:Mp4Composer-android:v0.4.1'
 
     compileOnly "io.reactivex.rxjava3:rxjava:3.0.8"
     compileOnly 'io.reactivex.rxjava3:rxandroid:3.0.0'
