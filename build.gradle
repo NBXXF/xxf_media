@@ -19,6 +19,9 @@ allprojects {
         google()
         maven { url "https://jitpack.io" }
     }
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'// maven禁止缓存
+    }
 }
 
 task clean(type: Delete) {

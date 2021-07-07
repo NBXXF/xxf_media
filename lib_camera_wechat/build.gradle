@@ -1,9 +1,11 @@
 plugins {
     id 'com.android.library'
+    id 'checkstyle'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.github.dcendents.android-maven'
 }
+
 android {
     compileSdkVersion 29
     buildToolsVersion '29.0.2'
