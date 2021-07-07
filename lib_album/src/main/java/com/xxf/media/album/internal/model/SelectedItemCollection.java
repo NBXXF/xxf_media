@@ -158,9 +158,13 @@ public class SelectedItemCollection {
             String cause;
 
             try {
-                cause = mContext.getResources().getQuantityString(
-                        R.plurals.error_over_count,
-                        maxSelectable,
+//                cause = mContext.getResources().getQuantityString(
+//                        R.plurals.error_over_count,
+//                        maxSelectable,
+//                        maxSelectable
+//                );
+                cause = mContext.getString(
+                        R.string.error_over_count,
                         maxSelectable
                 );
             } catch (Resources.NotFoundException e) {

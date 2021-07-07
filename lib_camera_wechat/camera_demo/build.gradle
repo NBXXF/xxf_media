@@ -40,6 +40,6 @@ dependencies {
 
     implementation "io.reactivex.rxjava3:rxjava:3.0.8"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'com.github.NBXXF.xxf_android:lib_permission:3.3.5.1'
-    implementation 'com.github.NBXXF.xxf_android:lib_activityresult:3.3.5.1'
+    implementation 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.6'
+    implementation 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.6'
 }

@@ -14,7 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="album_name_all">Все</string>
 
     <string name="button_preview">Предпросмотр</string>
@@ -26,7 +26,7 @@
     <string name="button_ok">OK</string>
 
     <string name="error_over_count_default">Вы выбрали максимальное количество файлов</string>
-    <plurals name="error_over_count">
+    <plurals name="error_over_count" tools:ignore="MissingDefaultResource">
         <item quantity="one">Можно выбрать не более %1$d файла</item>
         <item quantity="few">Можно выбрать не более %1$d файлов</item>
         <item quantity="many">Можно выбрать не более %1$d файлов</item>

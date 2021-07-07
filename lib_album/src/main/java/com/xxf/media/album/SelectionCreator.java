@@ -382,7 +382,7 @@ public final class SelectionCreator {
                                     .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
                                         @Override
                                         public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
-                                            return RxActivityResultCompact
+                                            return RxActivityResultCompact.INSTANCE
                                                     .startActivityForResult(activity, intent, requestCode);
                                         }
                                     });
@@ -393,7 +393,7 @@ public final class SelectionCreator {
                                 .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
                                     @Override
                                     public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
-                                        return RxActivityResultCompact
+                                        return RxActivityResultCompact.INSTANCE
                                                 .startActivityForResult(activity, intent, requestCode);
                                     }
                                 });

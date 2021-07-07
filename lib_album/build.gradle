@@ -1,7 +1,10 @@
-apply plugin: 'com.android.library'
-apply plugin: 'checkstyle'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.library'
+    id 'checkstyle'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.github.dcendents.android-maven'
+}
 
 android {
     compileSdkVersion 29
@@ -22,19 +25,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.annotation:annotation:1.1.0"
-    implementation "androidx.recyclerview:recyclerview:1.0.0"
     implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
-
     compileOnly 'com.github.bumptech.glide:glide:4.9.0'
     compileOnly 'com.squareup.picasso:picasso:2.5.2'
 
-    compileOnly "io.reactivex.rxjava3:rxjava:3.0.8"
-    compileOnly 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.3.5.1'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.3.5.1'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_adapter:3.3.5.1'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.6'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.6'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_adapter:3.6.1.6'
 }

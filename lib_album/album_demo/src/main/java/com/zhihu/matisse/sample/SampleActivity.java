@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xxf.activityresult.ActivityResult;
+import com.xxf.activityresult.RxActivityResultCompact;
 import com.xxf.media.album.AlbumLauncher;
 import com.xxf.media.album.AlbumResult;
 import com.xxf.media.album.MimeType;
@@ -26,10 +28,14 @@ import com.xxf.media.album.filter.Filter;
 import com.xxf.media.album.internal.entity.CaptureStrategy;
 import com.xxf.media.album.internal.entity.Item;
 import com.xxf.media.album.repo.AlbumService;
+import com.xxf.permission.RxPermissions;
+import com.xxf.permission.transformer.RxPermissionTransformer;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 public class SampleActivity extends AppCompatActivity implements View.OnClickListener {
@@ -194,27 +200,27 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        AlbumService.INSTANCE.getAlbum(this)
-                .subscribe(new Consumer<List<Item>>() {
-                    @Override
-                    public void accept(List<Item> items) throws Throwable {
-                        System.out.println("=========>all:" + items);
-                    }
-                });
-        AlbumService.INSTANCE.getImages(this)
-                .subscribe(new Consumer<List<Item>>() {
-                    @Override
-                    public void accept(List<Item> items) throws Throwable {
-                        System.out.println("=========>imgs:" + items);
-                    }
-                });
-
-        AlbumService.INSTANCE.getVideos(this)
-                .subscribe(new Consumer<List<Item>>() {
-                    @Override
-                    public void accept(List<Item> strings) throws Throwable {
-                        System.out.println("=========>videos:" + strings);
-                    }
-                });
+//        AlbumService.INSTANCE.getAlbum(this)
+//                .subscribe(new Consumer<List<Item>>() {
+//                    @Override
+//                    public void accept(List<Item> items) throws Throwable {
+//                        System.out.println("=========>all:" + items);
+//                    }
+//                });
+//        AlbumService.INSTANCE.getImages(this)
+//                .subscribe(new Consumer<List<Item>>() {
+//                    @Override
+//                    public void accept(List<Item> items) throws Throwable {
+//                        System.out.println("=========>imgs:" + items);
+//                    }
+//                });
+//
+//        AlbumService.INSTANCE.getVideos(this)
+//                .subscribe(new Consumer<List<Item>>() {
+//                    @Override
+//                    public void accept(List<Item> strings) throws Throwable {
+//                        System.out.println("=========>videos:" + strings);
+//                    }
+//                });
     }
 }
