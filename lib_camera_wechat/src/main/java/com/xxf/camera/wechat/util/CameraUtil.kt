@@ -26,7 +26,7 @@ class CameraUtil {
                     offsets.add(Math.abs(offset))
                 }
                 if (offsets.isNotEmpty()){
-                    var minOffset = offsets.min()
+                    var minOffset = offsets.minOrNull()
                     for (size in supportedSizes) {
                         val offset = (size.width.toFloat() / size.height.toFloat() - aspectRatio)
                         if (Math.abs(offset) == minOffset && (size.height <= maxHeight || size.width <= maxWidth) && (size.height >= 640 || size.width >= 480)) {
@@ -55,7 +55,7 @@ class CameraUtil {
                     offsets.add(Math.abs(offset))
                 }
                 if (offsets.isNotEmpty()) {
-                    var minOffset = offsets.min()
+                    var minOffset = offsets.minOrNull()
                     for (size in supportedSizes) {
                         //Log.e("getMinOptimalSize", "getMinOptimalSize: ${size}")
                         val offset = (size.width.toFloat() / size.height - aspectRatio)

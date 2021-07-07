@@ -95,12 +95,12 @@ class CameraLauncher {
     companion object {
         const val CAPTURE_RESULT_IS_IMG = "CaptureResultIsImg"
         const val CAPTURE_RESULT = "CaptureResult"
-        fun resultIsImg(data: Intent): Boolean {
-            return data.getBooleanExtra(CAPTURE_RESULT_IS_IMG, false)
+        fun resultIsImg(data: Intent?): Boolean {
+            return data?.getBooleanExtra(CAPTURE_RESULT_IS_IMG, false)?:false
         }
 
-        fun getResultPath(data: Intent): String {
-            return data.getStringExtra(CAPTURE_RESULT)
+        fun getResultPath(data: Intent?): String {
+            return data?.getStringExtra(CAPTURE_RESULT)?:""
         }
 
         val instance: CameraLauncher by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
