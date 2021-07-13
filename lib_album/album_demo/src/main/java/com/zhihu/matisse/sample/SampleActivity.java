@@ -33,6 +33,7 @@ import com.xxf.permission.transformer.RxPermissionTransformer;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
@@ -57,6 +58,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.zhihu).setOnClickListener(this);
         findViewById(R.id.dracula).setOnClickListener(this);
         findViewById(R.id.only_gif).setOnClickListener(this);
+        findViewById(R.id.btn_permission).setOnClickListener(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,6 +76,7 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
     private void startAction(View v) {
         switch (v.getId()) {
             case R.id.zhihu:
+
                 AlbumLauncher.from(SampleActivity.this)
                         .choose(MimeType.ofImage(), false)
                         .countable(true)
@@ -146,6 +149,18 @@ public class SampleActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         });
                 break;
+            case R.id.btn_permission:{
+                new RxPermissions(this)
+                        .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                        .compose(new RxPermissionTransformer(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA))
+                        .flatMap(new Function<Boolean, ObservableSource<ActivityResult>>() {
+                            @Override
+                            public ObservableSource<ActivityResult> apply(Boolean aBoolean) throws Throwable {
+                                Log.d("=====>","====>index:"+aBoolean);
+                                return Observable.empty();
+                            }
+                        }).subscribe();
+            }
             default:
                 break;
         }

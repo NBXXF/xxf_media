@@ -28,7 +28,7 @@ dependencies {
     compileOnly 'com.github.bumptech.glide:glide:4.9.0'
     compileOnly 'com.squareup.picasso:picasso:2.5.2'
 
-    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.6'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.6'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_adapter:3.6.1.6'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.7'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.7'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_adapter:3.6.1.7'
 }

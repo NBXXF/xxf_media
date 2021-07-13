@@ -30,8 +30,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     api 'com.github.MasayukiSuda:Mp4Composer-android:v0.4.1'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.6'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.6'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.7'
+    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.7'
 }
 repositories {
     maven { url 'https://jitpack.io' }
