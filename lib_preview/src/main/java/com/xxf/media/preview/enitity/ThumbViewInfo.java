@@ -2,6 +2,7 @@ package com.xxf.media.preview.enitity;
 
 import android.graphics.Rect;
 import android.os.Parcel;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 
@@ -24,6 +25,23 @@ public class ThumbViewInfo implements IThumbViewInfo, Serializable {
         this.videoUrl = videoUrl;
         this.bounds = bounds;
     }
+
+    /**
+     *
+     * @param url
+     * @param videoUrl
+     * @param transitionView  过渡的view
+     */
+    public ThumbViewInfo(String url, String videoUrl, @Nullable View transitionView) {
+        Rect bounds=new Rect();
+        if(transitionView!=null&&transitionView.getParent()!=null) {
+            transitionView.getGlobalVisibleRect(bounds);
+        }
+        this.url = url;
+        this.videoUrl = videoUrl;
+        this.bounds = bounds;
+    }
+
 
     public void setUrl(String url) {
         this.url = url;
