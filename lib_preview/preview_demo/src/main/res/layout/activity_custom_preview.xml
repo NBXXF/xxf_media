@@ -20,7 +20,7 @@
 
 
     <include layout="@layout/activity_image_preview_photo" />
-         <android.support.v7.widget.AppCompatButton
+         <androidx.appcompat.widget.AppCompatButton
              android:layout_gravity="center"
              android:layout_marginTop="-130dp"
              android:id="@+id/testBtn"

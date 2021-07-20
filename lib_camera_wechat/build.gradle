@@ -4,14 +4,12 @@ plugins {
     id 'kotlin-kapt'
     id 'com.github.dcendents.android-maven'
 }
-
+def des = rootProject.ext.dependencies
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.2'
-
+    compileSdkVersion project.TARGET_SDK_VERSION.toInteger()
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion project.MIN_SDK_VERSION.toInteger()
+        targetSdkVersion project.TARGET_SDK_VERSION.toInteger()
     }
 
     buildTypes {
@@ -20,10 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
 dependencies {

@@ -4,21 +4,24 @@ plugins {
     id 'kotlin-kapt'
     id 'com.github.dcendents.android-maven'
 }
-
+def des = rootProject.ext.dependencies
+def xxf_Ver = rootProject.ext.dependVersion.xxf_android;
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.2'
-
+    compileSdkVersion project.TARGET_SDK_VERSION.toInteger()
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 29
+        minSdkVersion project.MIN_SDK_VERSION.toInteger()
+        targetSdkVersion project.TARGET_SDK_VERSION.toInteger()
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    lintOptions {
-        abortOnError false
     }
 }
 
@@ -28,7 +31,7 @@ dependencies {
     compileOnly 'com.github.bumptech.glide:glide:4.9.0'
     compileOnly 'com.squareup.picasso:picasso:2.5.2'
 
-    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.8'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.8'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_adapter:3.6.1.8'
+    compileOnly "com.github.NBXXF.xxf_android:lib_permission:$xxf_Ver"
+    compileOnly "com.github.NBXXF.xxf_android:lib_activityresult:$xxf_Ver"
+    compileOnly "com.github.NBXXF.xxf_android:lib_adapter:$xxf_Ver"
 }

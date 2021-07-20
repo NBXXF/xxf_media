@@ -18,7 +18,7 @@
         android:textSize="16sp"
         tools:text="测试文字" />
 
-    <com.example.testapp.NIneGridView
+    <com.jaeger.ninegridimageview.NineGridImageView
         android:id="@+id/ngl_images"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -9,13 +9,16 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.previewpicture.ImageUrlConfig;
 import com.example.previewpicture.R;
 import com.example.previewpicture.bean.UserViewInfo;
 import com.example.previewpicture.custom.UserFragment;
+import com.example.previewpicture.databinding.ItemImageBinding;
 import com.xxf.media.preview.GPreviewBuilder;
 import com.xxf.media.preview.loader.VideoClickListener;
+import com.xxf.view.recyclerview.adapter.OnItemClickListener;
+import com.xxf.view.recyclerview.adapter.XXFRecyclerAdapter;
+import com.xxf.view.recyclerview.adapter.XXFViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,32 +50,31 @@ public class VideoViewActivity extends Activity {
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         MyBaseQuickAdapter adapter=new MyBaseQuickAdapter(this);
-        adapter.addData(mThumbViewInfoList);
+        adapter.bindData(true,mThumbViewInfoList);
         mRecyclerView.setAdapter(adapter);
-       adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-           @Override
-           public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-               computeBoundsBackward(mGridLayoutManager.findFirstVisibleItemPosition());
-               GPreviewBuilder.from(VideoViewActivity.this)
-                       .setData(mThumbViewInfoList)
-                       .setUserFragment(UserFragment.class)
-                       .setCurrentIndex(position)
-                       .setSingleFling(true)
-                    /*   .setOnVideoPlayerListener(new VideoClickListener(){
+        adapter.setOnItemClickListener(new OnItemClickListener<ItemImageBinding, UserViewInfo>() {
+            @Override
+            public void onItemClick(XXFRecyclerAdapter<ItemImageBinding, UserViewInfo> adapter, XXFViewHolder<ItemImageBinding, UserViewInfo> holder, View itemView, int index, UserViewInfo item) {
+                computeBoundsBackward(mGridLayoutManager.findFirstVisibleItemPosition());
+                GPreviewBuilder.from(VideoViewActivity.this)
+                        .setData(mThumbViewInfoList)
+                        .setUserFragment(UserFragment.class)
+                        .setCurrentIndex(index)
+                        .setSingleFling(true)
+                        /*   .setOnVideoPlayerListener(new VideoClickListener(){
 
-                           @Override
-                           public void onPlayerVideo(String url) {
-                               Log.d("onPlayerVideo",url);
-                               Intent intent=new Intent(VideoViewActivity.this,VideoPlayerDetailedActivity.class);
-                               intent.putExtra("url",url);
-                               startActivity(intent);
-                           }
-                       })*/
-                       .setType(GPreviewBuilder.IndicatorType.Number)
-                       .start();
-           }
-       });
-
+                               @Override
+                               public void onPlayerVideo(String url) {
+                                   Log.d("onPlayerVideo",url);
+                                   Intent intent=new Intent(VideoViewActivity.this,VideoPlayerDetailedActivity.class);
+                                   intent.putExtra("url",url);
+                                   startActivity(intent);
+                               }
+                           })*/
+                        .setType(GPreviewBuilder.IndicatorType.Number)
+                        .start();
+            }
+        });
 
     }
     /**

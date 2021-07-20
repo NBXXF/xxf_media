@@ -1,14 +1,19 @@
 package com.example.previewpicture.video;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.previewpicture.R;
 import com.example.previewpicture.bean.UserViewInfo;
+import com.example.previewpicture.databinding.ItemImageBinding;
+import com.xxf.view.recyclerview.adapter.XXFRecyclerAdapter;
+import com.xxf.view.recyclerview.adapter.XXFViewHolder;
 
 
 /**
@@ -17,22 +22,28 @@ import com.example.previewpicture.bean.UserViewInfo;
  * Deprecated:
  */
 
-public class MyBaseQuickAdapter extends BaseQuickAdapter<UserViewInfo,BaseViewHolder> {
+public class MyBaseQuickAdapter extends XXFRecyclerAdapter<ItemImageBinding,UserViewInfo> {
     public static final String TAG = "MyBaseQuickAdapter";
+
   private  Context context;
     public MyBaseQuickAdapter(Context context) {
-        super(R.layout.item_image);
         this.context=context;
     }
 
+
     @Override
-    protected void convert(BaseViewHolder helper, UserViewInfo item) {
-        final ImageView thumbView = helper.getView(R.id.iv);
-       if (item.getVideoUrl()==null){
-           helper.getView(R.id.btnVideo).setVisibility(View.GONE);
-       }else {
-           helper.getView(R.id.btnVideo).setVisibility(View.VISIBLE);
-       }
+    protected ItemImageBinding onCreateBinding(LayoutInflater inflater, ViewGroup viewGroup, int viewType) {
+        return ItemImageBinding.inflate(inflater,viewGroup,false);
+    }
+
+    @Override
+    public void onBindHolder(XXFViewHolder<ItemImageBinding, UserViewInfo> holder, @Nullable UserViewInfo item, int index) {
+        final ImageView thumbView = holder.getBinding().iv;
+        if (item.getVideoUrl()==null){
+            holder.getBinding().btnVideo.setVisibility(View.GONE);
+        }else {
+            holder.getBinding().btnVideo.setVisibility(View.VISIBLE);
+        }
 
         Glide.with(context)
                 .load(item.getUrl())
