@@ -3,14 +3,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+def des = rootProject.ext.dependencies
+def xxf_Ver = rootProject.ext.dependVersion.xxf_android;
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+    compileSdkVersion project.TARGET_SDK_VERSION.toInteger()
+
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion project.MIN_SDK_VERSION.toInteger()
+        targetSdkVersion project.TARGET_SDK_VERSION.toInteger()
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,14 +33,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'com.google.android.material:material:1.0.0'
     api project(':lib_camera_wechat')
 
-    implementation "io.reactivex.rxjava3:rxjava:3.0.8"
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.8'
-    implementation 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.8'
+    implementation des.material
+    implementation "com.github.NBXXF.xxf_android:lib_permission:$xxf_Ver"
+    implementation "com.github.NBXXF.xxf_android:lib_activityresult:$xxf_Ver"
 }

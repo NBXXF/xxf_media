@@ -5,6 +5,7 @@ plugins {
     id 'com.github.dcendents.android-maven'
 }
 def des = rootProject.ext.dependencies
+def xxf_Ver = rootProject.ext.dependVersion.xxf_android;
 android {
     compileSdkVersion project.TARGET_SDK_VERSION.toInteger()
     defaultConfig {
@@ -22,14 +23,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
     api 'com.github.MasayukiSuda:Mp4Composer-android:v0.4.1'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_permission:3.6.1.8'
-    compileOnly 'com.github.NBXXF.xxf_android:lib_activityresult:3.6.1.8'
+
+    compileOnly "com.github.NBXXF.xxf_android:lib_permission:$xxf_Ver"
+    compileOnly "com.github.NBXXF.xxf_android:lib_activityresult:$xxf_Ver"
 }
 repositories {
     maven { url 'https://jitpack.io' }
