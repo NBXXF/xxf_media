@@ -2,6 +2,7 @@ package com.xxf.media.previewer.ui
 
 
 import android.os.Bundle
+import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -26,6 +27,11 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         setContentView(binding.root)
         supportPostponeEnterTransition()
         initView()
@@ -33,11 +39,6 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun initView() {
         params = intent.getSerializableExtra(Config.PREVIEW_PARAM) as PreviewParam
-        //设置全屏
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         imageViewPagerAdapter =
             object : FragmentStatePagerAdapter(
                 supportFragmentManager,
