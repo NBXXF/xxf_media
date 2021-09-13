@@ -18,7 +18,7 @@ import com.xxf.media.previewer.model.PreviewParam
  * date createTime：2021/9/13
  * Description ://
  */
-class PreviewActivity : AppCompatActivity() {
+open class PreviewActivity : AppCompatActivity() {
     private lateinit var params: PreviewParam;
     private lateinit var imageViewPagerAdapter: FragmentStatePagerAdapter
     private val fragmentMap = hashMapOf<Int, Fragment>()

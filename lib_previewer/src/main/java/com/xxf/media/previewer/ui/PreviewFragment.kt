@@ -29,7 +29,7 @@ import com.xxf.media.previewer.model.url.VideoImageUrl
  * date createTime：2021/9/13
  * Description ://
  */
-class PreviewFragment : Fragment() {
+open class PreviewFragment : Fragment() {
     protected lateinit var url: ImageUrl;
     protected lateinit var binding: XxfFragmentPreviewBinding;
     override fun onCreateView(
