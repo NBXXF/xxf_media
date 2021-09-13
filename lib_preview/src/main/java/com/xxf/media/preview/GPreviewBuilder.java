@@ -21,6 +21,7 @@ import java.util.List;
  * Deprecated:
  */
 
+@Deprecated
 public final class GPreviewBuilder {
     private Activity mContext;
     private Intent intent;
