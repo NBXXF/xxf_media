@@ -2,6 +2,7 @@ package com.xxf.media.previewer.ui
 
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -51,7 +52,16 @@ class PreviewActivity : AppCompatActivity() {
                 override fun getItem(position: Int): Fragment {
                     val fragment = fragmentMap[position]
                     return if (fragment == null) {
-                        val imageFragment = PreviewFragment()
+                        lateinit var imageFragment: Fragment;
+                        /**
+                         * 处理自定义问题
+                         */
+                        if (!TextUtils.isEmpty(params.userFragmentClass)) {
+                            imageFragment =
+                                Class.forName(params.userFragmentClass).newInstance() as Fragment
+                        } else {
+                            imageFragment = PreviewFragment()
+                        }
                         imageFragment.arguments = Bundle().apply {
                             putSerializable(Config.PREVIEW_PARAM, params.urls.get(position))
                         }

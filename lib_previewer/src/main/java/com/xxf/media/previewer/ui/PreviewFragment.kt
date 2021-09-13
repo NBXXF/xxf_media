@@ -30,8 +30,8 @@ import com.xxf.media.previewer.model.url.VideoImageUrl
  * Description ://
  */
 class PreviewFragment : Fragment() {
-    private lateinit var url: ImageUrl;
-    private lateinit var binding: XxfFragmentPreviewBinding;
+    protected lateinit var url: ImageUrl;
+    protected lateinit var binding: XxfFragmentPreviewBinding;
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

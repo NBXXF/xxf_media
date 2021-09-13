@@ -14,10 +14,18 @@ public class PreviewParam implements Serializable {
     public List<ImageUrl> urls;
     public int currentIndex;
     public String sharedElementName;
+    public String userFragmentClass;
 
     public PreviewParam(List<ImageUrl> urls, int currentIndex, String sharedElementName) {
         this.urls = urls;
         this.currentIndex = currentIndex;
         this.sharedElementName = sharedElementName;
+    }
+
+    public PreviewParam(List<ImageUrl> urls, int currentIndex, String sharedElementName, String userFragmentClass) {
+        this.urls = urls;
+        this.currentIndex = currentIndex;
+        this.sharedElementName = sharedElementName;
+        this.userFragmentClass = userFragmentClass;
     }
 }

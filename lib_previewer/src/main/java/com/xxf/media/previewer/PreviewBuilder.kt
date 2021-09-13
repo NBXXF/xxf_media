@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.xxf.media.previewer.model.PreviewParam
 import com.xxf.media.previewer.model.url.ImageUrl
 import com.xxf.media.previewer.ui.PreviewActivity
@@ -16,6 +17,7 @@ import com.xxf.media.previewer.ui.PreviewActivity
 class PreviewBuilder(private val activity: AppCompatActivity) {
     private var urls: List<ImageUrl> = listOf<ImageUrl>()
     private var currentIndex = 0;
+    private var userFragmentClass: String? = null
 
     /**
      * 单个多媒体源  支持id string 自定义模型等
@@ -34,6 +36,14 @@ class PreviewBuilder(private val activity: AppCompatActivity) {
     }
 
     /**
+     * 自定义页面
+     */
+    fun <T : Fragment> setUserFragment(c: Class<T>): PreviewBuilder {
+        this.userFragmentClass = c.name
+        return this;
+    }
+
+    /**
      * 当前位置
      */
     fun setCurrentIndex(index: Int): PreviewBuilder {
@@ -45,7 +55,7 @@ class PreviewBuilder(private val activity: AppCompatActivity) {
         activity.startActivity(Intent(activity, PreviewActivity::class.java).apply {
             putExtra(
                 Config.PREVIEW_PARAM,
-                PreviewParam(urls, currentIndex, null)
+                PreviewParam(urls, currentIndex, null, userFragmentClass)
             )
         })
     }
@@ -58,7 +68,7 @@ class PreviewBuilder(private val activity: AppCompatActivity) {
             Intent(activity, PreviewActivity::class.java).apply {
                 putExtra(
                     Config.PREVIEW_PARAM,
-                    PreviewParam(urls, currentIndex, sharedElementName)
+                    PreviewParam(urls, currentIndex, sharedElementName, userFragmentClass)
                 )
             },
             ActivityOptions.makeSceneTransitionAnimation(activity, sharedElement, sharedElementName)
