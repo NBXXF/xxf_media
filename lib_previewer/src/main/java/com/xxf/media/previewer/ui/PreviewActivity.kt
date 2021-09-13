@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -77,6 +78,20 @@ open class PreviewActivity : AppCompatActivity() {
         if (params.currentIndex >= 0 && params.currentIndex < params.urls.size) {
             binding.viewPager.setCurrentItem(params.currentIndex, false)
             binding.viewPager.transitionName = params.sharedElementName
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        try {
+            val lp = window.attributes
+            lp.flags = lp.flags or WindowManager.LayoutParams.FLAG_FULLSCREEN
+            window.attributes = lp
+            window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            supportActionBar?.hide()
+        } catch (e: Throwable) {
+            e.printStackTrace()
         }
     }
 }

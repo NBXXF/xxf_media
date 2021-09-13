@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val urls = mutableListOf<ImageUrl>()
-        urls.add(ImageThumbAutoOriginUrl("https://hellorfimg.zcool.cn/preview260/129132983.jpg","https://hellorfimg.zcool.cn/preview260/298757792.jpg"))
+        urls.add(ImageThumbAutoOriginUrl("https://cdn.allflow.cn/2021/09/13/7757984b-727c-4977-904d-0732f96d90f0/Screenshot_20210504_092135_notion.id.jpg?filename=Screenshot_20210504_092135_notion.id.jpg&original=true","https://cdn.allflow.cn/2021/09/13/7757984b-727c-4977-904d-0732f96d90f0/Screenshot_20210504_092135_notion.id.jpg?filename=Screenshot_20210504_092135_notion.id.jpg&original=true"))
         urls.add(ImageUrl("https://hellorfimg.zcool.cn/preview260/1156349101.jpg"))
         urls.add(VideoImageUrl("https://hellorfimg.zcool.cn/preview260/1156349101.jpg","http://lmp4.vjshi.com/2018-06-07/cf673556cce54ab9cf4633fd7d9d0d46.mp4"))
         urls.add(ImageUrl("https://hellorfimg.zcool.cn/preview260/298757792.jpg"))
