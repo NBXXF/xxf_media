@@ -93,6 +93,7 @@ open class PreviewFragment : Fragment() {
             binding.videoView.visibility = View.VISIBLE
             binding.videoView.setVideoPath((url as VideoImageUrl).sourceUrl)
             binding.videoView.start()
+            requireActivity().supportStartPostponedEnterTransition()
         } else {
             binding.imageView.visibility = View.VISIBLE
             binding.videoView.visibility = View.GONE
