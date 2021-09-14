@@ -5,17 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.DrawableImageViewTarget
-import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.bumptech.glide.request.transition.Transition
 import com.xxf.media.photoview.PhotoViewAttacher
 import com.xxf.media.previewer.Config
@@ -37,7 +30,13 @@ open class PreviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = XxfFragmentPreviewBinding.inflate(inflater, container, false)
+        if (this::binding.isInitialized) {
+            if (this.binding.root.parent != null) {
+                (this.binding.root.parent as ViewGroup).removeView(this.binding.root)
+            }
+        } else {
+            binding = XxfFragmentPreviewBinding.inflate(inflater, container, false)
+        }
         return binding.root
     }
 
@@ -60,6 +59,10 @@ open class PreviewFragment : Fragment() {
                 requireActivity().onBackPressed()
             }
         })
+        loadImage()
+    }
+
+    open fun loadImage() {
         if (url is ImageThumbAutoOriginUrl) {
             binding.imageView.visibility = View.VISIBLE
             binding.videoView.visibility = View.GONE
@@ -71,7 +74,20 @@ open class PreviewFragment : Fragment() {
                         .load(url.url)
                 )
                 .dontAnimate()
-                .into(binding.imageView)
+                .into(object : DrawableImageViewTarget(binding.imageView) {
+                    override fun onResourceReady(
+                        resource: Drawable,
+                        transition: Transition<in Drawable>?
+                    ) {
+                        super.onResourceReady(resource, transition)
+                        requireActivity().supportStartPostponedEnterTransition()
+                    }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+                        requireActivity().supportStartPostponedEnterTransition()
+                    }
+                })
         } else if (url is VideoImageUrl) {
             binding.imageView.visibility = View.GONE
             binding.videoView.visibility = View.VISIBLE

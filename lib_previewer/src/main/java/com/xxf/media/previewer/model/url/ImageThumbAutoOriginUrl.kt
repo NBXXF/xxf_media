@@ -7,4 +7,4 @@ package com.xxf.media.previewer.model.url
  * @param thumbUrl 缩略图
  * @param originaUrl 原图
  */
-class ImageThumbAutoOriginUrl(thumbUrl: String, val originUrl: String) : ImageUrl(thumbUrl)
+class ImageThumbAutoOriginUrl(val thumbUrl: String, val originUrl: String) : ImageUrl(thumbUrl)
