@@ -2,6 +2,7 @@ package com.xxf.media.previewer.ui
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,6 +65,7 @@ open class PreviewFragment : Fragment() {
 
     open fun loadImage() {
         if (url is ImageThumbAutoOriginUrl) {
+            binding.imageView.visibility = View.GONE
             binding.imageView.visibility = View.VISIBLE
             binding.videoView.visibility = View.GONE
             Glide.with(this)
@@ -91,10 +93,20 @@ open class PreviewFragment : Fragment() {
         } else if (url is VideoImageUrl) {
             binding.imageView.visibility = View.GONE
             binding.videoView.visibility = View.VISIBLE
+            binding.progressBar.visibility=View.VISIBLE
+            binding.videoView.setOnPreparedListener {
+                binding.progressBar.visibility=View.GONE
+            }
+            binding.videoView.setOnErrorListener { mp, what, extra ->
+                binding.progressBar.visibility=View.GONE
+                Log.d("=======>error","what:$what  extra:$extra");
+                false
+            }
             binding.videoView.setVideoPath((url as VideoImageUrl).sourceUrl)
             binding.videoView.start()
             requireActivity().supportStartPostponedEnterTransition()
         } else {
+            binding.imageView.visibility = View.GONE
             binding.imageView.visibility = View.VISIBLE
             binding.videoView.visibility = View.GONE
             Glide.with(this)
