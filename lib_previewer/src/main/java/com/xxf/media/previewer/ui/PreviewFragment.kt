@@ -79,7 +79,7 @@ open class PreviewFragment : Fragment() {
                     Glide.with(this)
                         .load(url.url)
                         .priority(Priority.IMMEDIATE)
-                            //避免缩略图太慢导致动画不能执行
+                        //避免缩略图太慢导致动画不能执行
                         .timeout(300)
                         .addListener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
@@ -148,6 +148,35 @@ open class PreviewFragment : Fragment() {
             var request = Glide.with(this)
                 .load(url.url)
                 .priority(Priority.IMMEDIATE)
+                .thumbnail(Glide.with(this)
+                    .load(url.url)
+                    .priority(Priority.IMMEDIATE)
+                    .thumbnail(0.8f)
+                    //避免缩略图太慢导致动画不能执行
+                    .timeout(300)
+                    .addListener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            requireActivity().supportStartPostponedEnterTransition()
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            requireActivity().supportStartPostponedEnterTransition()
+                            return false
+                        }
+                    })
+                )
             if (url.placeholderResourceId > 0) {
                 request = request.placeholder(url.placeholderResourceId)
             }
