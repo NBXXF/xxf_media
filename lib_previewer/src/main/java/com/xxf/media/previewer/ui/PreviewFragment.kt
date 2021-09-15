@@ -79,6 +79,8 @@ open class PreviewFragment : Fragment() {
                     Glide.with(this)
                         .load(url.url)
                         .priority(Priority.IMMEDIATE)
+                            //避免缩略图太慢导致动画不能执行
+                        .timeout(300)
                         .addListener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(
                                 e: GlideException?,
