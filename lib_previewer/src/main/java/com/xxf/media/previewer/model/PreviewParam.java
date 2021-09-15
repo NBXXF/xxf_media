@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Author: XGod  xuanyouwu@163.com  17611639080  https://github.com/NBXXF     https://blog.csdn.net/axuanqq
  * date createTime：2021/9/13
- * Description ://TODO
+ * Description ://预览主页面参数
  */
 public class PreviewParam implements Serializable {
     public List<ImageUrl> urls;

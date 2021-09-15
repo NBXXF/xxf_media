@@ -1,9 +1,9 @@
 package com.xxf.media.previewer
 
+import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.xxf.media.previewer.model.PreviewParam
 import com.xxf.media.previewer.model.url.ImageUrl
@@ -14,7 +14,7 @@ import com.xxf.media.previewer.ui.PreviewActivity
  * date createTime：2021/9/13
  * Description ://预览图片和视频
  */
-class PreviewBuilder(private val activity: AppCompatActivity) {
+class PreviewBuilder(private val activity: Activity) {
     private var urls: List<ImageUrl> = listOf<ImageUrl>()
     private var currentIndex = 0;
     private var userFragmentClass: String? = null

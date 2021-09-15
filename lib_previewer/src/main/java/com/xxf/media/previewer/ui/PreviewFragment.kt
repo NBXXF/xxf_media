@@ -68,13 +68,20 @@ open class PreviewFragment : Fragment() {
             binding.imageView.visibility = View.GONE
             binding.imageView.visibility = View.VISIBLE
             binding.videoView.visibility = View.GONE
-            Glide.with(this)
+            var request = Glide.with(this)
                 .load((url as ImageThumbAutoOriginUrl).originUrl)
                 .priority(Priority.IMMEDIATE)
                 .thumbnail(
                     Glide.with(this)
                         .load(url.url)
-                )
+                );
+            if (url.placeholderResourceId > 0) {
+                request = request.placeholder(url.placeholderResourceId)
+            }
+            if (url.errorResourceId > 0) {
+                request = request.error(url.placeholderResourceId)
+            }
+            request
                 .dontAnimate()
                 .into(object : DrawableImageViewTarget(binding.imageView) {
                     override fun onResourceReady(
@@ -93,13 +100,13 @@ open class PreviewFragment : Fragment() {
         } else if (url is VideoImageUrl) {
             binding.imageView.visibility = View.GONE
             binding.videoView.visibility = View.VISIBLE
-            binding.progressBar.visibility=View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
             binding.videoView.setOnPreparedListener {
-                binding.progressBar.visibility=View.GONE
+                binding.progressBar.visibility = View.GONE
             }
             binding.videoView.setOnErrorListener { mp, what, extra ->
-                binding.progressBar.visibility=View.GONE
-                Log.d("=======>error","what:$what  extra:$extra");
+                binding.progressBar.visibility = View.GONE
+                Log.d("=======>error", "what:$what  extra:$extra");
                 false
             }
             binding.videoView.setVideoPath((url as VideoImageUrl).sourceUrl)
@@ -109,9 +116,16 @@ open class PreviewFragment : Fragment() {
             binding.imageView.visibility = View.GONE
             binding.imageView.visibility = View.VISIBLE
             binding.videoView.visibility = View.GONE
-            Glide.with(this)
+            var request = Glide.with(this)
                 .load(url.url)
                 .priority(Priority.IMMEDIATE)
+            if (url.placeholderResourceId > 0) {
+                request = request.placeholder(url.placeholderResourceId)
+            }
+            if (url.errorResourceId > 0) {
+                request = request.error(url.placeholderResourceId)
+            }
+            request
                 .dontAnimate()
                 .into(object : DrawableImageViewTarget(binding.imageView) {
                     override fun onResourceReady(

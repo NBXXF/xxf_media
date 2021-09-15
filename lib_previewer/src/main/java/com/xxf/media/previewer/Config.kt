@@ -3,7 +3,7 @@ package com.xxf.media.previewer
 /**
  * @Author: XGod  xuanyouwu@163.com  17611639080  https://github.com/NBXXF     https://blog.csdn.net/axuanqq
  * date createTime：2021/9/13
- * Description ://TODO
+ * Description ://预览配置
  */
 object Config {
     /**
