@@ -33,5 +33,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation des.material
     compileOnly 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
 }

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -15,7 +16,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.xxf.media.photoview.PhotoViewAttacher
+import com.github.chrisbanes.photoview.OnPhotoTapListener
+import com.github.chrisbanes.photoview.PhotoViewAttacher
 import com.xxf.media.previewer.Config
 import com.xxf.media.previewer.databinding.XxfFragmentPreviewBinding
 import com.xxf.media.previewer.model.url.ImageThumbAutoOriginUrl
@@ -55,15 +57,14 @@ open class PreviewFragment : Fragment() {
         binding.imageView.setOnViewTapListener { view, x, y ->
             requireActivity().onBackPressed()
         }
-        binding.imageView.setOnPhotoTapListener(object : PhotoViewAttacher.OnPhotoTapListener {
-            override fun onPhotoTap(view: View?, x: Float, y: Float) {
-                requireActivity().onBackPressed()
-            }
-
-            override fun onOutsidePhotoTap() {
+        binding.imageView.setOnPhotoTapListener(object : OnPhotoTapListener {
+            override fun onPhotoTap(view: ImageView?, x: Float, y: Float) {
                 requireActivity().onBackPressed()
             }
         })
+        binding.imageView.setOnOutsidePhotoTapListener {
+            requireActivity().onBackPressed()
+        }
         loadImage()
     }
 
@@ -148,34 +149,35 @@ open class PreviewFragment : Fragment() {
             var request = Glide.with(this)
                 .load(url.url)
                 .priority(Priority.IMMEDIATE)
-                .thumbnail(Glide.with(this)
-                    .load(url.url)
-                    .priority(Priority.IMMEDIATE)
-                    .thumbnail(0.8f)
-                    //避免缩略图太慢导致动画不能执行
-                    .timeout(300)
-                    .addListener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            requireActivity().supportStartPostponedEnterTransition()
-                            return false
-                        }
+                .thumbnail(
+                    Glide.with(this)
+                        .load(url.url)
+                        .priority(Priority.IMMEDIATE)
+                        .thumbnail(0.8f)
+                        //避免缩略图太慢导致动画不能执行
+                        .timeout(300)
+                        .addListener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                requireActivity().supportStartPostponedEnterTransition()
+                                return false
+                            }
 
-                        override fun onResourceReady(
-                            resource: Drawable?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            requireActivity().supportStartPostponedEnterTransition()
-                            return false
-                        }
-                    })
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                requireActivity().supportStartPostponedEnterTransition()
+                                return false
+                            }
+                        })
                 )
             if (url.placeholderResourceId > 0) {
                 request = request.placeholder(url.placeholderResourceId)

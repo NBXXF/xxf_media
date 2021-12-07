@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val urls = mutableListOf<ImageUrl>()
-        urls.add(ImageUrl("https://yunshanglvzhou.oss-cn-beijing.aliyuncs.com/2021/09/14/a053cfcb-9209-452b-862f-c802c88f3b68/1631606401165.png?OSSAccessKeyId=LTAI5tCJiH9pfBVTSHBxJ82G&Expires=1631610536&Signature=mBn3aTqgfafdIALJC6lohLHTU6I%3D&response-content-disposition=attachment%3B%20filename%3D1631606401165.png"))
+        urls.add(ImageUrl("https://img2.baidu.com/it/u=867486893,367507022&fm=26&fmt=auto"))
 
         urls.add(ImageThumbAutoOriginUrl("https://cdn.allflow.cn/2021/09/13/7757984b-727c-4977-904d-0732f96d90f0/Screenshot_20210504_092135_notion.id.jpg?filename=Screenshot_20210504_092135_notion.id.jpg&original=true&x-oss-process=image/resize,w_1600/quality,q_90","https://cdn.allflow.cn/2021/09/13/7757984b-727c-4977-904d-0732f96d90f0/Screenshot_20210504_092135_notion.id.jpg?filename=Screenshot_20210504_092135_notion.id.jpg&original=true"))
         urls.add(ImageUrl("https://hellorfimg.zcool.cn/preview260/1156349101.jpg"))
