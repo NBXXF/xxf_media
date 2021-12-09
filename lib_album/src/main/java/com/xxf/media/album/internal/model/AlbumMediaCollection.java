@@ -19,6 +19,7 @@ package com.xxf.media.album.internal.model;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -83,6 +84,7 @@ public class AlbumMediaCollection implements LoaderManager.LoaderCallbacks<Curso
     public void onDestroy() {
         if (mLoaderManager != null) {
             mLoaderManager.destroyLoader(LOADER_ID);
+            mLoaderManager = null;
         }
         mCallbacks = null;
     }

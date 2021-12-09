@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.ActionBar;
@@ -45,6 +46,7 @@ import com.xxf.media.album.internal.utils.PathUtils;
 import com.xxf.media.album.internal.utils.PhotoMetadataUtils;
 
 import com.xxf.media.album.internal.utils.SingleMediaScanner;
+
 import java.util.ArrayList;
 
 /**
@@ -225,7 +227,8 @@ public class AlbumActivity extends AppCompatActivity implements
                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             new SingleMediaScanner(this.getApplicationContext(), path, new SingleMediaScanner.ScanListener() {
-                @Override public void onScanFinish() {
+                @Override
+                public void onScanFinish() {
                     Log.i("SingleMediaScanner", "scan finish!");
                 }
             });
@@ -380,6 +383,10 @@ public class AlbumActivity extends AppCompatActivity implements
             mContainer.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
             Fragment fragment = MediaSelectionFragment.newInstance(album);
+            Fragment oldFragment = getSupportFragmentManager().findFragmentByTag(MediaSelectionFragment.class.getSimpleName());
+            if (oldFragment != null && oldFragment instanceof MediaSelectionFragment) {
+                ((MediaSelectionFragment) oldFragment).destroyManagerLoader();
+            }
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.container, fragment, MediaSelectionFragment.class.getSimpleName())
