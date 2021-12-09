@@ -1,5 +1,10 @@
-include ':lib_audio', ':lib_audio:audio_demo', ':lib_audio:audio_demo_qq'
-include ':lib_camera_wechat', ':lib_camera_wechat:camera_demo'
-include ':lib_album', ':lib_album:album_demo'
+include ':lib_audio'
 include ':lib_preview'
+include ':lib_album'
+include ':lib_camera_wechat'
+
+
+include ':lib_audio:audio_demo', ':lib_audio:audio_demo_qq'
+include ':lib_camera_wechat:camera_demo'
+include ':lib_album:album_demo'
 include ':lib_preview:lib_previewer_demo'

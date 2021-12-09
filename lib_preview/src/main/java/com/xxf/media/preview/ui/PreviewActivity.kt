@@ -1,18 +1,16 @@
-package com.xxf.media.previewer.ui
+package com.xxf.media.preview.ui
 
 
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.xxf.media.previewer.Config
-import com.xxf.media.previewer.databinding.XxfActivityPreviewBinding
-import com.xxf.media.previewer.model.PreviewParam
+import com.xxf.media.preview.Config
+import com.xxf.media.preview.databinding.XxfActivityPreviewBinding
+import com.xxf.media.preview.model.PreviewParam
 
 /**
  * @Author: XGod  xuanyouwu@163.com  17611639080  https://github.com/NBXXF     https://blog.csdn.net/axuanqq

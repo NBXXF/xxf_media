@@ -12,7 +12,7 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-    <com.xxf.media.previewer.ui.SafePhotoView
+    <com.xxf.media.preview.ui.SafePhotoView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,4 +1,4 @@
-package com.xxf.media.previewer.model.url
+package com.xxf.media.preview.model.url
 
 /**
  * @Author: XGod  xuanyouwu@163.com  17611639080  https://github.com/NBXXF     https://blog.csdn.net/axuanqq

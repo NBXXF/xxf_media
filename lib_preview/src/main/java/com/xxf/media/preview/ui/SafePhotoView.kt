@@ -1,4 +1,4 @@
-package com.xxf.media.previewer.ui
+package com.xxf.media.preview.ui
 
 import android.content.Context
 import android.graphics.Canvas

@@ -1,6 +1,6 @@
-package com.xxf.media.previewer.model;
+package com.xxf.media.preview.model;
 
-import com.xxf.media.previewer.model.url.ImageUrl;
+import com.xxf.media.preview.model.url.ImageUrl;
 
 import java.io.Serializable;
 import java.util.List;

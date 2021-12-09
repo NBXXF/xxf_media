@@ -1,12 +1,12 @@
-package com.xxf.media.previewer.demo
+package com.xxf.media.preview.demo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.xxf.media.previewer.PreviewBuilder
-import com.xxf.media.previewer.demo.databinding.ActivityMainBinding
-import com.xxf.media.previewer.model.url.ImageThumbAutoOriginUrl
-import com.xxf.media.previewer.model.url.ImageUrl
-import com.xxf.media.previewer.model.url.VideoImageUrl
+import com.xxf.media.preview.PreviewBuilder
+import com.xxf.media.preview.demo.databinding.ActivityMainBinding
+import com.xxf.media.preview.model.url.ImageThumbAutoOriginUrl
+import com.xxf.media.preview.model.url.ImageUrl
+import com.xxf.media.preview.model.url.VideoImageUrl
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {

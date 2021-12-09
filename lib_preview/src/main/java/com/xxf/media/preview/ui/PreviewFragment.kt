@@ -1,4 +1,4 @@
-package com.xxf.media.previewer.ui
+package com.xxf.media.preview.ui
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -17,12 +17,11 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.github.chrisbanes.photoview.OnPhotoTapListener
-import com.github.chrisbanes.photoview.PhotoViewAttacher
-import com.xxf.media.previewer.Config
-import com.xxf.media.previewer.databinding.XxfFragmentPreviewBinding
-import com.xxf.media.previewer.model.url.ImageThumbAutoOriginUrl
-import com.xxf.media.previewer.model.url.ImageUrl
-import com.xxf.media.previewer.model.url.VideoImageUrl
+import com.xxf.media.preview.Config
+import com.xxf.media.preview.databinding.XxfFragmentPreviewBinding
+import com.xxf.media.preview.model.url.ImageThumbAutoOriginUrl
+import com.xxf.media.preview.model.url.ImageUrl
+import com.xxf.media.preview.model.url.VideoImageUrl
 
 /**
  * @Author: XGod  xuanyouwu@163.com  17611639080  https://github.com/NBXXF     https://blog.csdn.net/axuanqq

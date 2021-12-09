@@ -1,13 +1,13 @@
-package com.xxf.media.previewer
+package com.xxf.media.preview
 
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.xxf.media.previewer.model.PreviewParam
-import com.xxf.media.previewer.model.url.ImageUrl
-import com.xxf.media.previewer.ui.PreviewActivity
+import com.xxf.media.preview.model.PreviewParam
+import com.xxf.media.preview.model.url.ImageUrl
+import com.xxf.media.preview.ui.PreviewActivity
 
 /**
  * @Author: XGod  xuanyouwu@163.com  17611639080  https://github.com/NBXXF     https://blog.csdn.net/axuanqq

@@ -1,4 +1,4 @@
-package com.xxf.media.previewer.demo
+package com.xxf.media.preview.demo
 
 import org.junit.Test
 

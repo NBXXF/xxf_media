@@ -1,4 +1,4 @@
-package com.xxf.media.previewer.model.url;
+package com.xxf.media.preview.model.url;
 
 import androidx.annotation.DrawableRes;
 
