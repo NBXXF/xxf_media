@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         val urls = mutableListOf<ImageUrl>()
         urls.add(ImageUrl("https://img2.baidu.com/it/u=867486893,367507022&fm=26&fmt=auto"))
+        urls.add(ImageUrl("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimglf3.nosdn0.126.net%2Fimg%2FWEFHU2lQKzFVM1lGbWFTcG84YXdudFl2dnhPN3ZSY0g4UFRzSlpzMjZ1TGs5MEF4YTRYbjN3PT0.gif&refer=http%3A%2F%2Fimglf3.nosdn0.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1641978854&t=c9e5dbad5650e8313878c17ceec8f137"))
 
         urls.add(ImageThumbAutoOriginUrl("https://cdn.allflow.cn/2021/09/13/7757984b-727c-4977-904d-0732f96d90f0/Screenshot_20210504_092135_notion.id.jpg?filename=Screenshot_20210504_092135_notion.id.jpg&original=true&x-oss-process=image/resize,w_1600/quality,q_90","https://cdn.allflow.cn/2021/09/13/7757984b-727c-4977-904d-0732f96d90f0/Screenshot_20210504_092135_notion.id.jpg?filename=Screenshot_20210504_092135_notion.id.jpg&original=true"))
         urls.add(ImageUrl("https://hellorfimg.zcool.cn/preview260/1156349101.jpg"))

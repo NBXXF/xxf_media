@@ -111,7 +111,6 @@ open class PreviewFragment : Fragment() {
                 request = request.error(url.placeholderResourceId)
             }
             request
-                .dontAnimate()
                 .into(object : DrawableImageViewTarget(binding.imageView) {
                     override fun onResourceReady(
                         resource: Drawable,
@@ -185,7 +184,6 @@ open class PreviewFragment : Fragment() {
                 request = request.error(url.placeholderResourceId)
             }
             request
-                .dontAnimate()
                 .into(object : DrawableImageViewTarget(binding.imageView) {
                     override fun onResourceReady(
                         resource: Drawable,
