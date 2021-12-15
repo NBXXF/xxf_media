@@ -7,5 +7,5 @@ package com.xxf.media.preview.model.url
  *
  * @param sourceUrl 资源文件原始路径
  */
-class VideoImageUrl(url: String, val sourceUrl: String) : ImageUrl(url) {
+open class VideoImageUrl(url: String, val sourceUrl: String) : ImageUrl(url) {
 }
