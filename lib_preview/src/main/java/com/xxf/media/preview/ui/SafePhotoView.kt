@@ -25,10 +25,10 @@ open class SafePhotoView : PhotoView {
         attr,
         defStyle
     )
-
-    init {
-        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-    }
+//
+//    init {
+//        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+//    }
 
     override fun onDraw(canvas: Canvas?) {
         try {
