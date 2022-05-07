@@ -158,7 +158,7 @@ public final class PhotoMetadataUtils {
         ExifInterface exif;
         try {
             exif = ExifInterfaceCompat.newInstance(getPath(resolver, uri));
-        } catch (IOException e) {
+        } catch (Throwable e) {
             Log.e(TAG, "could not read exif info of the image: " + uri);
             return false;
         }
