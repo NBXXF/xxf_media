@@ -53,18 +53,18 @@ class CameraActivity : AppCompatActivity() {
      * 预览组件监听
      */
     private val surfaceTextureListener = object : TextureView.SurfaceTextureListener {
-        override fun onSurfaceTextureAvailable(surface: SurfaceTexture?, width: Int, height: Int) {
+        override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
             Log.e(TAG, "onSurfaceTextureAvailable: 初始化完毕")
             mWorkingSurface = Surface(surface)
             openCamera()
         }
 
-        override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture?, width: Int, height: Int) {
+        override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
         }
 
-        override fun onSurfaceTextureUpdated(surface: SurfaceTexture?) = Unit
+        override fun onSurfaceTextureUpdated(surface: SurfaceTexture) = Unit
 
-        override fun onSurfaceTextureDestroyed(surface: SurfaceTexture?): Boolean = true
+        override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean = true
     }
 
     private val MAX_PREVIEW_WIDTH = lazy { (ScreenUtil.getScreenHeight(this)) }
@@ -256,7 +256,7 @@ class CameraActivity : AppCompatActivity() {
     private fun startBackgroundThread() {
         if (backgroundThread == null) {
             backgroundThread = HandlerThread("CameraBackground").also { it.start() }
-            backgroundHandler = Handler(backgroundThread?.looper)
+            backgroundHandler = Handler(backgroundThread!!.looper)
         }
     }
 
@@ -457,7 +457,7 @@ class CameraActivity : AppCompatActivity() {
         initPreview()
         //预览视图
         val surfaceTexture = binding.mTextureView.surfaceTexture
-        surfaceTexture.setDefaultBufferSize(previewSize.width, previewSize.height)
+        surfaceTexture?.setDefaultBufferSize(previewSize.width, previewSize.height)
 
         previewBuilder = cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
         val outputList = mutableListOf<Surface>()
@@ -495,7 +495,7 @@ class CameraActivity : AppCompatActivity() {
     private fun record() {
         closePreviewSession()
         val surfaceTexture = binding.mTextureView.surfaceTexture
-        surfaceTexture.setDefaultBufferSize(recordSize.width, recordSize.height)
+        surfaceTexture?.setDefaultBufferSize(recordSize.width, recordSize.height)
         //重置录像
         if (setUpMediaRecorder()) {
             cameraDevice?.let {
