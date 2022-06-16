@@ -1,0 +1,158 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.zhihu.matisse.sample"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="31" />
+9-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+11-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:5:5-80
+11-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:5:22-78
+12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+12-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:6:5-79
+12-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:6:22-77
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:7:5-64
+13-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:7:22-62
+14
+15    <queries>
+15-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:14:5-22:15
+16        <package android:name="com.tencent.mm" />
+16-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:15:9-50
+16-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:15:18-47
+17        <package android:name="com.tencent.mobileqq" />
+17-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:16:9-56
+17-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:16:18-53
+18        <package android:name="com.sina.weibo" />
+18-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:17:9-50
+18-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:17:18-47
+19
+20        <intent>
+20-->[com.github.NBXXF.xxf_android:lib_view:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/92d34865ca578fed9106909671ccad64/jetified-lib_view-4.9.2.6/AndroidManifest.xml:19:9-21:18
+21            <action android:name="android.intent.action.MAIN" />
+21-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:20:17-69
+21-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:20:25-66
+22        </intent>
+23    </queries>
+24
+25    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+25-->[com.github.NBXXF.xxf_android:xxf:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/fee71b802d252380c0db3be45cfe6d3e/jetified-xxf-4.9.2.6/AndroidManifest.xml:9:5-79
+25-->[com.github.NBXXF.xxf_android:xxf:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/fee71b802d252380c0db3be45cfe6d3e/jetified-xxf-4.9.2.6/AndroidManifest.xml:9:22-76
+26    <uses-permission android:name="android.permission.INTERNET" />
+26-->[com.github.NBXXF.xxf_android:lib_http:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/3c78bd55d337a098581d0ab42733874d/jetified-lib_http-4.9.2.6/AndroidManifest.xml:9:5-67
+26-->[com.github.NBXXF.xxf_android:lib_http:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/3c78bd55d337a098581d0ab42733874d/jetified-lib_http-4.9.2.6/AndroidManifest.xml:9:22-64
+27
+28    <application
+28-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:8:5-25:19
+29        android:name="com.xxf.media.cropper.demo.App"
+29-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:12:9-28
+30        android:allowBackup="true"
+30-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:9:9-35
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.7.0] /Users/xxf/.gradle/caches/transforms-2/files-2.1/3cb13b5a3fa438c0858121481ee89236/core-1.7.0/AndroidManifest.xml:24:18-86
+32        android:debuggable="true"
+33        android:icon="@mipmap/ic_launcher"
+33-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:10:9-43
+34        android:label="@string/app_name"
+34-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:11:9-41
+35        android:roundIcon="@mipmap/ic_launcher_round"
+35-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:13:9-54
+36        android:supportsRtl="true"
+36-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:14:9-35
+37        android:testOnly="true"
+38        android:theme="@style/Theme.Xxf_media" >
+38-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:15:9-47
+39        <activity
+39-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:16:9-24:20
+40            android:name="com.xxf.media.cropper.demo.MainActivity"
+40-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:17:13-41
+41            android:exported="true" >
+41-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:18:13-36
+42            <intent-filter>
+42-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:19:13-23:29
+43                <action android:name="android.intent.action.MAIN" />
+43-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:20:17-69
+43-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:20:25-66
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:22:17-77
+45-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/cropper_demo/src/main/AndroidManifest.xml:22:27-74
+46            </intent-filter>
+47        </activity>
+48        <activity android:name="com.xxf.media.cropper.CropActivity" /> <!-- 微信sdk 要求必须在app的主工程下面建立 .wxapi.WXEntryActivity  这里采用别名的方式 -->
+48-->[:lib_cropper] /Users/xxf/StudioProjects/xxf_media/lib_cropper/build/intermediates/library_manifest/debug/AndroidManifest.xml:10:9-71
+48-->[:lib_cropper] /Users/xxf/StudioProjects/xxf_media/lib_cropper/build/intermediates/library_manifest/debug/AndroidManifest.xml:10:19-68
+49        <activity
+49-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:13:9-16:64
+50            android:name="com.xxf.wechat.wxapi.WXEntryActivity"
+50-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:14:13-64
+51            android:launchMode="singleTask"
+51-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:15:13-44
+52            android:theme="@android:style/Theme.Translucent" />
+52-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:16:13-61
+53
+54        <activity-alias
+54-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:26:9-33:54
+55            android:name="com.zhihu.matisse.sample.wxapi.WXEntryActivity"
+55-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:27:13-66
+56            android:exported="true"
+56-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:28:13-36
+57            android:launchMode="singleTask"
+57-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:29:13-44
+58            android:targetActivity="com.xxf.wechat.wxapi.WXEntryActivity"
+58-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:30:13-74
+59            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+59-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:31:13-83
+60        <activity-alias
+60-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:18:9-25:54
+61            android:name="com.zhihu.matisse.sample.wxapi.WXPayEntryActivity"
+61-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:19:13-69
+62            android:exported="true"
+62-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:20:13-36
+63            android:launchMode="singleTask"
+63-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:21:13-44
+64            android:targetActivity="com.xxf.wechat.wxapi.WXEntryActivity"
+64-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:22:13-74
+65            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+65-->[com.github.NBXXF.xxf_android:lib_wechat:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5f0ed6232a46bd966749bb98959a11c4/jetified-lib_wechat-4.9.2.6/AndroidManifest.xml:23:13-83
+66
+67        <provider
+67-->[com.github.NBXXF.xxf_android:lib_application:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5d6d371b7d620031390f542132be9506/jetified-lib_application-4.9.2.6/AndroidManifest.xml:11:9-19:20
+68            android:name="androidx.startup.InitializationProvider"
+68-->[com.github.NBXXF.xxf_android:lib_application:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5d6d371b7d620031390f542132be9506/jetified-lib_application-4.9.2.6/AndroidManifest.xml:12:13-67
+69            android:authorities="com.zhihu.matisse.sample.androidx-startup"
+69-->[com.github.NBXXF.xxf_android:lib_application:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5d6d371b7d620031390f542132be9506/jetified-lib_application-4.9.2.6/AndroidManifest.xml:13:13-68
+70            android:exported="false" >
+70-->[com.github.NBXXF.xxf_android:lib_application:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5d6d371b7d620031390f542132be9506/jetified-lib_application-4.9.2.6/AndroidManifest.xml:14:13-37
+71            <meta-data
+71-->[com.github.NBXXF.xxf_android:lib_application:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5d6d371b7d620031390f542132be9506/jetified-lib_application-4.9.2.6/AndroidManifest.xml:16:13-18:52
+72                android:name="com.xxf.application.ApplicationInitializer"
+72-->[com.github.NBXXF.xxf_android:lib_application:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5d6d371b7d620031390f542132be9506/jetified-lib_application-4.9.2.6/AndroidManifest.xml:17:17-74
+73                android:value="androidx.startup" />
+73-->[com.github.NBXXF.xxf_android:lib_application:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/5d6d371b7d620031390f542132be9506/jetified-lib_application-4.9.2.6/AndroidManifest.xml:18:17-49
+74        </provider>
+75        <provider
+75-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:10:9-18:20
+76            android:name="androidx.core.content.FileProvider"
+76-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:11:13-62
+77            android:authorities="com.zhihu.matisse.sample.android7.fileprovider"
+77-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:12:13-73
+78            android:exported="false"
+78-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:13:13-37
+79            android:grantUriPermissions="true" >
+79-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:14:13-47
+80            <meta-data
+80-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:15:13-17:54
+81                android:name="android.support.FILE_PROVIDER_PATHS"
+81-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:16:17-67
+82                android:resource="@xml/file_paths" />
+82-->[com.github.NBXXF.xxf_android:lib_fileprovider:4.9.2.6] /Users/xxf/.gradle/caches/transforms-2/files-2.1/993265689a9c9653cc66483f7196b978/jetified-lib_fileprovider-4.9.2.6/AndroidManifest.xml:17:17-51
+83        </provider>
+84    </application>
+85
+86</manifest>

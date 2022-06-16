@@ -1,0 +1,31 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:2:1-8:12
+INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:2:1-8:12
+	package
+		ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:3:5-36
+		INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+		INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:5:5-7:19
+activity#com.xxf.media.cropper.CropActivity
+ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:6:9-49
+	android:name
+		ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:6:19-47
+uses-sdk
+INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+		ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+		INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+		ADDED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+		INJECTED from /Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml

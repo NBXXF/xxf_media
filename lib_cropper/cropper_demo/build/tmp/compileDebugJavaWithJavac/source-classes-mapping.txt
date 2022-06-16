@@ -1,0 +1,6 @@
+com/xxf/media/cropper/demo/BuildConfig.java
+ com.xxf.media.cropper.demo.BuildConfig
+com/xxf/media/cropper/demo/App.java
+ com.xxf.media.cropper.demo.App
+ com.xxf.media.cropper.demo.App$1
+ com.xxf.media.cropper.demo.App$2

@@ -1,0 +1,18 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.xxf.media.cropper" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="21"
+6-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="31" />
+7-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml
+8
+9    <application>
+9-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:5:5-7:19
+10        <activity android:name="com.xxf.media.cropper.CropActivity" />
+10-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:6:9-49
+10-->/Users/xxf/StudioProjects/xxf_media/lib_cropper/src/main/AndroidManifest.xml:6:19-47
+11    </application>
+12
+13</manifest>

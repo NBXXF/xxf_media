@@ -1,0 +1,6 @@
+com/xxf/media/cropper/BuildConfig.java
+ com.xxf.media.cropper.BuildConfig
+com/xxf/media/cropper/CropActivity.java
+ com.xxf.media.cropper.CropActivity
+ com.xxf.media.cropper.CropActivity$1
+ com.xxf.media.cropper.CropActivity$2

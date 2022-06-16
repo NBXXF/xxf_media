@@ -1,0 +1,11 @@
+R_DEF: Internal format may change without notice
+local
+color black_overlay
+color colorAccent
+color colorPrimary
+color colorPrimaryDark
+id btn_cancel
+id btn_ok
+id iv_crop
+id ll_btn
+layout activity_crop
