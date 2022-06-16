@@ -6,7 +6,6 @@
     <application>
         <activity
             android:name="com.xxf.media.preview.ui.PreviewActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/preview_transparent_style" />
     </application>
 </manifest>

@@ -1,6 +1,6 @@
 ext {
     dependVersion = [
-            xxf_android: "3.6.1.8"
+            xxf_android: "4.9.3.0"
     ]
     dependencies = [
             //主要依赖库

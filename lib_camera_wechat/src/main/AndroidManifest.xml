@@ -14,7 +14,6 @@
         <!--拍摄Activity-->
         <activity
             android:name="com.xxf.camera.wechat.CameraActivity"
-            android:screenOrientation="portrait"
             android:hardwareAccelerated="true"
             android:theme="@style/JCameraTheme"/>
 
