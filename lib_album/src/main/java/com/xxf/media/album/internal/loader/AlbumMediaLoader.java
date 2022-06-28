@@ -120,7 +120,17 @@ public class AlbumMediaLoader extends CursorLoader {
     }
     // ===============================================================
 
-    private static final String ORDER_BY = MediaStore.Images.Media.DATE_TAKEN + " DESC";
+   // private static final String ORDER_BY = MediaStore.Images.Media.DATE_TAKEN + " DESC";
+
+    //https://android.googlesource.com/platform/packages/apps/Gallery/+/refs/heads/android10-mainline-a-release/src/com/android/camera/gallery/BaseImageList.java
+    // 列表首先按日期排序，然后按 id 排序。
+    // 日期是从“datetaken”列中获取的。 但如果它为空，
+    // 改为使用“date_modified”列。
+    public static final String ORDER_BY =
+            "case ifnull(" + MediaStore.Images.Media.DATE_TAKEN + ",0)" +
+                    " when 0 then " + MediaStore.Images.Media.DATE_MODIFIED + "*1000" +
+                    " else " + MediaStore.Images.Media.DATE_TAKEN +
+                    " end" + " DESC , " + MediaStore.Images.ImageColumns._ID + " DESC";
     private final boolean mEnableCapture;
 
     private AlbumMediaLoader(Context context, String selection, String[] selectionArgs, boolean capture) {
