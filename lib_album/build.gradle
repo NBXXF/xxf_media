@@ -34,4 +34,6 @@ dependencies {
     compileOnly "com.github.NBXXF.xxf_android:lib_permission:$xxf_Ver"
     compileOnly "com.github.NBXXF.xxf_android:lib_activityresult:$xxf_Ver"
     compileOnly "com.github.NBXXF.xxf_android:lib_adapter:$xxf_Ver"
+    compileOnly "com.github.NBXXF.xxf_android:lib_utils:$xxf_Ver"
+    compileOnly "com.github.NBXXF.xxf_android:lib_rxjava:$xxf_Ver"
 }

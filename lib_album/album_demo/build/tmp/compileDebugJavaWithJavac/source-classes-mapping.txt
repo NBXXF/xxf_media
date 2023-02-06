@@ -1,0 +1,14 @@
+com/zhihu/matisse/sample/BuildConfig.java
+ com.zhihu.matisse.sample.BuildConfig
+com/zhihu/matisse/sample/GifSizeFilter.java
+ com.zhihu.matisse.sample.GifSizeFilter
+ com.zhihu.matisse.sample.GifSizeFilter$1
+com/zhihu/matisse/sample/SampleActivity.java
+ com.zhihu.matisse.sample.SampleActivity
+ com.zhihu.matisse.sample.SampleActivity$1
+ com.zhihu.matisse.sample.SampleActivity$2
+ com.zhihu.matisse.sample.SampleActivity$3
+ com.zhihu.matisse.sample.SampleActivity$4
+ com.zhihu.matisse.sample.SampleActivity$5
+ com.zhihu.matisse.sample.SampleActivity$UriAdapter
+ com.zhihu.matisse.sample.SampleActivity$UriAdapter$UriViewHolder

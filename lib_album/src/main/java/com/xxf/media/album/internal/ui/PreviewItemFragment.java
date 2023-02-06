@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +21,16 @@ import com.xxf.media.album.internal.entity.Item;
 import com.xxf.media.album.internal.entity.SelectionSpec;
 import com.xxf.media.album.internal.utils.PhotoMetadataUtils;
 import com.xxf.media.album.listener.OnFragmentInteractionListener;
+import com.xxf.rxjava.RxLifecycle;
+import com.xxf.utils.RomUtils;
 
+import java.util.concurrent.Callable;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
@@ -79,13 +91,43 @@ public class PreviewItemFragment extends Fragment {
             }
         });
 
-        Point size = PhotoMetadataUtils.getBitmapSize(item.getContentUri(), getActivity());
-        if (item.isGif()) {
-            SelectionSpec.getInstance().imageEngine.loadGifImage(getContext(), size.x, size.y, image,
-                    item.getContentUri());
+        //华为 鸿蒙会闪退 https://github.com/zhihu/Matisse/issues/726
+        //目前尝试异步获取大小
+        if (RomUtils.isHuawei()) {
+            Observable
+                    .fromCallable(new Callable<Point>() {
+                        @Override
+                        public Point call() throws Exception {
+                            Point size = PhotoMetadataUtils.getBitmapSize(item.getContentUri(), getActivity());
+                            return size;
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .to(RxLifecycle.INSTANCE.bindLifecycle(this, Lifecycle.Event.ON_DESTROY))
+                    .subscribe(new Consumer<Point>() {
+                        @Override
+                        public void accept(Point size) throws Throwable {
+                            loadImageWithItem(item, size, image);
+                        }
+                    });
         } else {
-            SelectionSpec.getInstance().imageEngine.loadImage(getContext(), size.x, size.y, image,
-                    item.getContentUri());
+            Point size = PhotoMetadataUtils.getBitmapSize(item.getContentUri(), getActivity());
+            loadImageWithItem(item, size, image);
+        }
+    }
+
+    void loadImageWithItem(Item item, Point size, ImageViewTouch image) {
+        try {
+            if (item.isGif()) {
+                SelectionSpec.getInstance().imageEngine.loadGifImage(getContext(), size.x, size.y, image,
+                        item.getContentUri());
+            } else {
+                SelectionSpec.getInstance().imageEngine.loadImage(getContext(), size.x, size.y, image,
+                        item.getContentUri());
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
     }
 

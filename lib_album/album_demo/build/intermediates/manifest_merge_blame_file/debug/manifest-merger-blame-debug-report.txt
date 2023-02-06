@@ -1,0 +1,115 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3  Copyright 2017 Zhihu Inc.
+4
+5  Licensed under the Apache License, Version 2.0 (the "License");
+6  you may not use this file except in compliance with the License.
+7  You may obtain a copy of the License at
+8
+9  http://www.apache.org/licenses/LICENSE-2.0
+10
+11  Unless required by applicable law or agreed to in writing, software
+12  distributed under the License is distributed on an "AS IS" BASIS,
+13  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14  See the License for the specific language governing permissions and
+15  limitations under the License.
+16-->
+17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+18    package="com.zhihu.matisse.sample"
+19    android:versionCode="1"
+20    android:versionName="1.0" >
+21
+22    <uses-sdk
+23        android:minSdkVersion="21"
+23-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml
+24        android:targetSdkVersion="30" />
+24-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml
+25
+26    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+26-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:5-81
+26-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:22-78
+27    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+27-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:5-80
+27-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:22-77
+28    <uses-permission android:name="android.permission.CAMERA" />
+28-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:5-65
+28-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:22-62
+29
+30    <application
+30-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:20:5-43:19
+31        android:allowBackup="true"
+31-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:21:9-35
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.5.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/18bc5c660dc7d79abdfc1be712a4f04f/core-1.5.0/AndroidManifest.xml:24:18-86
+33        android:debuggable="true"
+34        android:icon="@mipmap/ic_launcher"
+34-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:22:9-43
+35        android:label="@string/app_name"
+35-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:23:9-41
+36        android:testOnly="true"
+37        android:theme="@style/AppTheme" >
+37-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:24:9-40
+38        <activity
+38-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:25:9-33:20
+39            android:name="com.zhihu.matisse.sample.SampleActivity"
+39-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:26:13-67
+40            android:configChanges="orientation|screenSize|keyboardHidden" >
+40-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:27:13-74
+41            <intent-filter>
+41-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:28:13-32:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:29:17-68
+42-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:29:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:31:17-76
+44-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:31:27-74
+45            </intent-filter>
+46        </activity>
+47
+48        <provider
+48-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:34:9-42:20
+49            android:name="androidx.core.content.FileProvider"
+49-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:35:13-62
+50            android:authorities="com.zhihu.matisse.sample.fileprovider"
+50-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:36:13-72
+51            android:exported="false"
+51-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:37:13-37
+52            android:grantUriPermissions="true" >
+52-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:38:13-47
+53            <meta-data
+53-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:39:13-41:71
+54                android:name="android.support.FILE_PROVIDER_PATHS"
+54-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:40:17-67
+55                android:resource="@xml/file_paths_public" />
+55-->/Users/a1234/AndroidStudioProjects/xxf_media/lib_album/album_demo/src/main/AndroidManifest.xml:41:17-58
+56        </provider>
+57
+58        <activity android:name="com.xxf.media.album.ui.AlbumActivity" />
+58-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:9-73
+58-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:19-70
+59        <activity android:name="com.xxf.media.album.internal.ui.AlbumPreviewActivity" />
+59-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:9-89
+59-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:19-86
+60        <activity android:name="com.xxf.media.album.internal.ui.SelectedPreviewActivity" />
+60-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:9-92
+60-->[:lib_album] /Users/a1234/AndroidStudioProjects/xxf_media/lib_album/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:19-89
+61
+62        <provider
+62-->[com.github.NBXXF.xxf_android:lib_application:4.9.3.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/42247b57bb572e588f561093882e0372/jetified-lib_application-4.9.3.0/AndroidManifest.xml:11:9-19:20
+63            android:name="androidx.startup.InitializationProvider"
+63-->[com.github.NBXXF.xxf_android:lib_application:4.9.3.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/42247b57bb572e588f561093882e0372/jetified-lib_application-4.9.3.0/AndroidManifest.xml:12:13-67
+64            android:authorities="com.zhihu.matisse.sample.androidx-startup"
+64-->[com.github.NBXXF.xxf_android:lib_application:4.9.3.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/42247b57bb572e588f561093882e0372/jetified-lib_application-4.9.3.0/AndroidManifest.xml:13:13-68
+65            android:exported="false" >
+65-->[com.github.NBXXF.xxf_android:lib_application:4.9.3.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/42247b57bb572e588f561093882e0372/jetified-lib_application-4.9.3.0/AndroidManifest.xml:14:13-37
+66            <meta-data
+66-->[com.github.NBXXF.xxf_android:lib_application:4.9.3.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/42247b57bb572e588f561093882e0372/jetified-lib_application-4.9.3.0/AndroidManifest.xml:16:13-18:52
+67                android:name="com.xxf.application.ApplicationInitializer"
+67-->[com.github.NBXXF.xxf_android:lib_application:4.9.3.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/42247b57bb572e588f561093882e0372/jetified-lib_application-4.9.3.0/AndroidManifest.xml:17:17-74
+68                android:value="androidx.startup" />
+68-->[com.github.NBXXF.xxf_android:lib_application:4.9.3.0] /Users/a1234/.gradle/caches/transforms-2/files-2.1/42247b57bb572e588f561093882e0372/jetified-lib_application-4.9.3.0/AndroidManifest.xml:18:17-49
+69        </provider>
+70    </application>
+71
+72</manifest>
