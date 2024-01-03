@@ -1,3 +1,5 @@
+# Deprecated Deprecated Deprecated
+最新 参考 https://github.com/NBXXF/xxf_android
 # 相册
 ```
    AlbumLauncher.from(SampleActivity.this)
